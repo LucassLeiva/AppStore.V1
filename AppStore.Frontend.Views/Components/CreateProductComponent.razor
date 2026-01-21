@@ -1,0 +1,92 @@
+﻿<EditForm Model=Product OnValidSubmit= "Product.Send">
+    <div class="form-group">
+        <label for="idCategory">
+            @CreateProductMessages.CategoryLabel
+        </label>
+        <InputNumber class="form-control" id="idCategory"
+                     placeholder="@CreateProductMessages.CategoryLabel"
+                     @bind-Value="Product.IdCategory" />
+    </div>
+
+    <div class="form-group">
+        <label for="internalCode">
+            @CreateProductMessages.InternalCodeLabel
+        </label>
+        <InputText class="form-control" id="internalCode"
+                   placeholder="@CreateProductMessages.InternalCodeLabel"
+                   @bind-Value="Product.InternalCode" />
+    </div>
+
+    <div class="form-group">
+        <label for="name">
+            @CreateProductMessages.NameLabel
+        </label>
+        <InputText class="form-control" id="name"
+                   placeholder="@CreateProductMessages.NameLabel"
+                   @bind-Value="Product.Name" />
+    </div>
+
+    <div class="form-group">
+        <label for="price">
+            @CreateProductMessages.PriceLabel
+        </label>
+        <InputNumber class="form-control" id="price"
+                     placeholder="@CreateProductMessages.PriceLabel"
+                     @bind-Value="Product.Price" />
+    </div>
+
+    <div class="form-group">
+        <label for="stockInicial">
+            @CreateProductMessages.StockInitialLabel
+        </label>
+        <InputNumber class="form-control" id="stockInicial"
+                     placeholder="@CreateProductMessages.StockInitialLabel"
+                     @bind-Value="Product.StockInicial" />
+    </div>
+
+    <div class="form-group">
+        <label for="idSupplier">
+            @CreateProductMessages.SupplierLabel
+        </label>
+        <InputNumber class="form-control" id="idSupplier"
+                     placeholder="@CreateProductMessages.SupplierLabel"
+                     @bind-Value="Product.IdSupplier" />
+    </div>
+
+    <div class="form-group">
+        <label for="description">
+            @CreateProductMessages.DescriptionLabel
+        </label>
+        <InputText class="form-control" id="description"
+                   placeholder="@CreateProductMessages.DescriptionLabel"
+                   @bind-Value="Product.Description" />
+    </div>
+
+    <div class="form-group">
+        <label for="state">
+            @CreateProductMessages.StateLabel
+        </label>
+        <InputNumber class="form-control" id="state"
+                     placeholder="@CreateProductMessages.StateLabel"
+                     @bind-Value="Product.State" />
+    </div>
+
+    <div class="row p-3">
+        <div class="col">
+            <button type="submit" class="btn btn-primary">
+                @CreateProductMessages.SaveButtonText
+            </button>
+        </div>
+    </div>
+
+</EditForm>
+
+<hr />
+
+@if (!string.IsNullOrWhiteSpace(Product.InformationMessage))
+{
+    <div class="alert alert-info">
+        @Product.InformationMessage
+    </div>
+}
+

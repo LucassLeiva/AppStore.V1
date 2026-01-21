@@ -1,0 +1,11 @@
+global using AppStore.Backend.DataContexts.EFCore.DataContexts;
+global using AppStore.Backend.DataContexts.EFCore.Options;
+global using AppStore.Backend.DataContexts.EFCore.Services;
+global using AppStore.Backend.Repositories.Entities;
+global using AppStore.Backend.Repositories.Interfaces;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Microsoft.Extensions.Options;
+global using System;
+global using System.Reflection;
+global using System.Threading.Tasks;

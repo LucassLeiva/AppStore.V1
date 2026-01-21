@@ -1,0 +1,12 @@
+﻿@page "/createproduct"
+<PageTitle>@CreateProductMessages.CreateProductPageTitle</PageTitle>
+<ErrorBoundary @ref=ErrorBoundaryRef>
+    <ChildContent>
+        <CreateProductComponent Product=ViewModel/>
+    </ChildContent> 
+    <ErrorContent>
+        <ExceptionDisplay Exception=context />
+        <button class="btn btn-danger" @onclick=Recover>@CommonMessages.OK
+        </button>
+    </ErrorContent>
+</ErrorBoundary>
