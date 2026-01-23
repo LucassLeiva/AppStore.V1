@@ -12,6 +12,8 @@
     <ProjectReference Include="..\AppStore.Backend.Presenters\AppStore.Backend.Presenters.csproj" />
     <ProjectReference Include="..\AppStore.Backend.Repositories\AppStore.Backend.Repositories.csproj" />
     <ProjectReference Include="..\AppStore.Backend.UseCases\AppStore.Backend.UseCases.csproj" />
+    <ProjectReference Include="..\AppStore.ValidationService.FluentValidation\AppStore.ValidationService.FluentValidation.csproj" />
+    <ProjectReference Include="..\AppStore.Validators.Entities\AppStore.Validators.Entities.csproj" />
   </ItemGroup>
 
 </Project>

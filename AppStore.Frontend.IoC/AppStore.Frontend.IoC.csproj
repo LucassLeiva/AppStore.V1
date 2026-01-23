@@ -9,6 +9,8 @@
   <ItemGroup>
     <ProjectReference Include="..\AppStore.Frontend.Views\AppStore.Frontend.Views.csproj" />
     <ProjectReference Include="..\AppStore.Frontend.WebApiGateways\AppStore.Frontend.WebApiGateways.csproj" />
+    <ProjectReference Include="..\AppStore.ValidationService.FluentValidation\AppStore.ValidationService.FluentValidation.csproj" />
+    <ProjectReference Include="..\AppStore.Validators.Entities\AppStore.Validators.Entities.csproj" />
   </ItemGroup>
 
 </Project>

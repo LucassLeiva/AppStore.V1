@@ -34,8 +34,8 @@
                 model.Price,
                 model.StockInicial,
                 model.Description,
-                model.IdSupplier,
-                model.State
+                model.IdSupplier
+                
             );
     }
 }

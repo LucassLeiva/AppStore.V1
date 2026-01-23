@@ -1,21 +1,23 @@
-﻿using AppStore.Entities.DTOs.Products.CreateProduct;
-
-namespace AppStore.Backend.UseCases.CreateProduct
+﻿namespace AppStore.Backend.UseCases.CreateProduct
 {
     internal class CreateProductInteractor(
     ICreateProductOutputPort outputPort,
-    ICommandsRepository repository) : ICreateProductInputPort
+    ICommandsRepository repository,
+    IModelValidatorHub<CreateProductDto> modelValidatorHub) : ICreateProductInputPort
     {
         public async Task Handle(CreateProductDto dto)
         {
-            // 1) Crear stock con la cantidad inicial (DTO trae short)
+            //Validar modelo
+            await GuardModel.AgainstNotValid(modelValidatorHub, dto);
+
+            // Crear stock con la cantidad inicial (DTO trae short)
             var stock = new Stock((int)dto.StockInicial);
 
-            // 2) Persistir stock y obtener su Id generado por DB
+            //Persistir stock y obtener su Id generado por DB
             int stockId = await repository.CreateStock(stock);
             stock.IdStock = stockId; // opcional, por claridad
 
-            // 3) Crear producto apuntando al stockId real
+            //Crear producto apuntando al stockId real
             var product = new Product(
                 dto.IdCategory,
                 dto.InternalCode,
@@ -26,11 +28,11 @@ namespace AppStore.Backend.UseCases.CreateProduct
                 dto.Description
             );
 
-            // 4) Persistir producto y obtener IdProducto real
+            //Persistir producto y obtener IdProducto real
             int productId = await repository.CreateProduct(product);
             product.IdProduct = productId;
 
-            // 5) Presenter ya recibe IdProducto correcto
+            //Presenter ya recibe IdProducto correcto
             await outputPort.Handle(product);
         }
     }

@@ -7,12 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AppStore.Entities\AppStore.Entities.csproj" />
-    <ProjectReference Include="..\AppStore.Validation.Entities\AppStore.Validation.Entities.csproj" />
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ValueObjects\" />
+    <ProjectReference Include="..\AppStore.Validation.Entities\AppStore.Validation.Entities.csproj" />
   </ItemGroup>
 
 </Project>

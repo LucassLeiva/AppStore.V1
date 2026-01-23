@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppStore.Entities.DTOs.Products.CreateProduct
 {
-    public class CreateProductDto(int idCategory, string internalCode, string name, decimal price, short stockInicial, string? description, int idSupplier, int state)
+    public class CreateProductDto(int idCategory, string internalCode, string name, decimal price, short stockInicial, string? description, int idSupplier)
     {
         public int IdCategory => idCategory;
         public string InternalCode => internalCode;
@@ -15,7 +15,7 @@ namespace AppStore.Entities.DTOs.Products.CreateProduct
         public short StockInicial => stockInicial;
         public string? Description => description;
         public int IdSupplier => idSupplier;
-        public int State => state;
+        
 
     }
 }

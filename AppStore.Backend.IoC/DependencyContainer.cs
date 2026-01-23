@@ -8,7 +8,9 @@ public static class DependencyContainer
         services.AddUseCasesServices()
         .AddRepositories()
         .AddDataContexts(configureDBOptions)
-        .AddPresenters();
+        .AddPresenters()
+        .AddValidationService()
+        .AddValidators();
         return services;
     }
 }

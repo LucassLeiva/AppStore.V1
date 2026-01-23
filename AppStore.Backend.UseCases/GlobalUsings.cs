@@ -4,3 +4,5 @@ global using AppStore.Backend.BusinessObjects.POCOEntities;
 global using AppStore.Backend.UseCases.CreateProduct;
 global using AppStore.Entities.DTOs;
 global using AppStore.Entities.DTOs.Products.CreateProduct;
+global using AppStore.Validation.Entities.Interfaces;
+global using AppStore.Backend.BusinessObjects.Guards;

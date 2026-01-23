@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Microsoft.Extensions.DependencyInjection;
+﻿namespace Microsoft.Extensions.DependencyInjection;
 public static class DependencyContainer
 {
     public static IServiceCollection AddAppStoreServices(
@@ -12,7 +6,9 @@ public static class DependencyContainer
     Action<HttpClient> configureHttpClient)
     {
         services.AddWebApiGateways(configureHttpClient)
-        .AddViewsServices();
+        .AddViewsServices()
+        .AddValidationService()
+        .AddValidators();
         return services;
     }
 }

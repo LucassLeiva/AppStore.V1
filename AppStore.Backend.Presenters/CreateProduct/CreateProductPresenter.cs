@@ -1,11 +1,4 @@
-﻿using AppStore.Backend.BusinessObjects.Interfaces.CreateProduct;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AppStore.Backend.Presenters.CreateProduct
+﻿namespace AppStore.Backend.Presenters.CreateProduct
 {
     internal class CreateProductPresenter : ICreateProductOutputPort
     {

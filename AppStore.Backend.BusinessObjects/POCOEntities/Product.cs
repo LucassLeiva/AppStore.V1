@@ -1,73 +1,72 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-public class Product
+﻿namespace AppStore.Backend.BusinessObjects.POCOEntities
 {
-    public int IdProduct { get; set; }
-
-    public int IdCategory { get; set; }
-
-    public string InternalCode { get; set; }
-
-    public string Name { get; set; }
-
-    public decimal Price { get; set; }
-
-    public int IdStock { get; set; }
-
-    public string? Description { get; set; }
-
-    public int State { get; set; } = 1;
-
-    public int IdSupplier { get; set; }
-
-    protected Product() { }
-
-    public Product(
-        int idCategory,
-        string internalCode,
-        string name,
-        decimal price,
-        int idStock,
-        int idSupplier,
-        string? description
-    )
+    public class Product
     {
-        IdCategory = idCategory;
-        InternalCode = internalCode;
-        Name = name;
-        Price = price;
-        IdStock = idStock;
-        IdSupplier = idSupplier;
-        Description = description;
+        public int IdProduct { get; set; }
 
-        Validate();
-    }
+        public int IdCategory { get; set; }
 
-    private void Validate()
-    {
-        if (string.IsNullOrWhiteSpace(InternalCode))
-            throw new ArgumentException("El código interno es obligatorio");
+        public string InternalCode { get; set; }
 
-        if (string.IsNullOrWhiteSpace(Name))
-            throw new ArgumentException("El nombre del producto es obligatorio");
+        public string Name { get; set; }
 
-        if (Price < 0)
-            throw new ArgumentException("El precio no puede ser negativo");
+        public decimal Price { get; set; }
 
-        if (IdCategory <= 0)
-            throw new ArgumentException("La categoría es obligatoria");
+        public int IdStock { get; set; }
 
-        if (string.IsNullOrWhiteSpace(InternalCode))
-            throw new ArgumentException("El código interno es obligatorio");
+        public string? Description { get; set; }
 
-        if (IdStock <= 0)
-            throw new ArgumentException("El stock es obligatorio");
+        public int State { get; private set; } = 1;
 
-        if (IdSupplier <= 0)
-            throw new ArgumentException("El proveedor es obligatorio");
+        public int IdSupplier { get; set; }
+
+        protected Product() { }
+
+        public Product(
+            int idCategory,
+            string internalCode,
+            string name,
+            decimal price,
+            int idStock,
+            int idSupplier,
+            string? description
+        )
+        {
+            IdCategory = idCategory;
+            InternalCode = internalCode;
+            Name = name;
+            Price = price;
+            IdStock = idStock;
+            IdSupplier = idSupplier;
+            Description = description;
+
+            Validate();
+
+        }
+
+        private void Validate()
+        {
+            if (string.IsNullOrWhiteSpace(InternalCode))
+                throw new ArgumentException("El código interno es obligatorio");
+
+            if (string.IsNullOrWhiteSpace(Name))
+                throw new ArgumentException("El nombre del producto es obligatorio");
+
+            if (Price <= 0)
+                throw new ArgumentException("El precio debe ser mayor a 0(cero)");
+
+            if (IdCategory <= 0)
+                throw new ArgumentException("La categoría es obligatoria");
+
+            if (IdStock <= 0)
+                throw new ArgumentException("El stock es obligatorio");
+
+            if (IdSupplier <= 0)
+                throw new ArgumentException("El proveedor es obligatorio");
+        }
+
+        public void Deactivate() => State = 0;
+
+        public void Activate() => State = 1;
     }
 }
