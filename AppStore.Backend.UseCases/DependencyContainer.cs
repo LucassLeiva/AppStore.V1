@@ -12,7 +12,13 @@ namespace Microsoft.Extensions.DependencyInjection;
             services.AddScoped<ICreateProductInputPort,CreateProductInteractor>();
             services.AddScoped<ICreateCategoryInputPort,CreateCategoryInteractor>();
             services.AddScoped<ICreateSupplierInputPort,CreateSupplierInteractor>();
-            return services;
+
+        //Servicios de Validacion de Casos de Usos
+            services.AddModelValidator<CreateProductDto, CreateProductCategoryValidator>();
+            services.AddModelValidator<CreateProductDto, CreateProductSupplierValidator>();
+            services.AddModelValidator<CreateProductDto, CreateProductInternalCodeValidator>();
+
+        return services;
         }
     }
 

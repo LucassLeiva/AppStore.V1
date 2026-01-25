@@ -6,3 +6,6 @@ global using AppStore.Entities.DTOs;
 global using AppStore.Entities.DTOs.Products.CreateProduct;
 global using AppStore.Validation.Entities.Interfaces;
 global using AppStore.Backend.BusinessObjects.Guards;
+global using AppStore.Backend.UseCases.Resources;
+global using AppStore.Validation.Entities.Enums;
+global using AppStore.Validation.Entities.ValueObjects;

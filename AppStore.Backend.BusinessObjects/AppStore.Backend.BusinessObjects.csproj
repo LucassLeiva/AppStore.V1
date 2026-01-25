@@ -11,8 +11,4 @@
     <ProjectReference Include="..\AppStore.Validation.Entities\AppStore.Validation.Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ValueObjects\" />
-  </ItemGroup>
-
 </Project>

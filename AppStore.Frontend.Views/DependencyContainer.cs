@@ -5,6 +5,13 @@ public static class DependencyContainer
     this IServiceCollection services)
     {
         services.AddScoped<CreateProductViewModel>();
+
+
+
+        //Servicio de Validacion del ViewModel
+        services.AddModelValidator<CreateProductViewModel, CreateProductViewModelValidator>();
+
         return services;
     }
+       
 }

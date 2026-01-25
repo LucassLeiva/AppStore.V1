@@ -1,6 +1,6 @@
 ﻿namespace AppStore.Frontend.Views.ViewModels.CreateProduct
 {
-    public class CreateProductViewModel(ICreateProductGateway gateway)
+    public class CreateProductViewModel(ICreateProductGateway gateway, IModelValidatorHub<CreateProductViewModel> validator)
     {
         #region Propiedades relacionadas a CreateProductDto
         public int IdCategory { get; set; }
@@ -14,6 +14,8 @@
         #endregion
 
         public string InformationMessage { get; private set; }
+
+        public IModelValidatorHub<CreateProductViewModel> Validator => validator;
 
         public async Task Send()
         {

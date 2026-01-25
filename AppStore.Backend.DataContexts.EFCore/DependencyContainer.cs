@@ -6,8 +6,8 @@ public static class DependencyContainer
     Action<DBOptions> configureDBOptions)
     {
         services.Configure(configureDBOptions);
-        services.AddScoped<IAppStoreCommandsDataContext,
-        AppStoreCommandsDataContext>();
+        services.AddScoped<IAppStoreCommandsDataContext, AppStoreCommandsDataContext>();
+        services.AddScoped<IAppStoreQueriesDataContext, AppStoreQueriesDataContext>();
         return services;
     }
 }

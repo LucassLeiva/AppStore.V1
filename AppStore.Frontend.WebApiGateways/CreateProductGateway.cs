@@ -13,6 +13,11 @@
             {
                 productId = await response.Content.ReadFromJsonAsync<int>();
             }
+            else
+            {
+                throw new HttpRequestException(
+                await response.Content.ReadAsStringAsync());
+            }
 
             return productId;
         }

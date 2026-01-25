@@ -14,4 +14,19 @@
     <ProjectReference Include="..\AppStore.Backend.BusinessObjects\AppStore.Backend.BusinessObjects.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Resources\CreateProductMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CreateProductMessages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\CreateProductMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CreateProductMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
