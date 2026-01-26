@@ -25,6 +25,27 @@ namespace AppStore.Backend.Repositories.Repositories
             return stockEntity.IdStock;
         }
 
+
+        public async Task UpdateStockAmount(int idStock, int amount)
+        {
+            var stock = await context.FindStockByIdAsync(idStock);
+            if (stock == null) throw new InvalidOperationException("Stock no encontrado.");
+
+            stock.Amount = amount;
+
+            await context.SaveChangesAsync();
+        }
+
+        public async Task UpdateProductState(int idProduct, int state)
+        {
+            var product = await context.FindProductByIdAsync(idProduct);
+            if (product == null) throw new InvalidOperationException("Producto no encontrado.");
+
+            product.State = state;
+
+            await context.SaveChangesAsync();
+        }
+
         public async Task<int> CreateProduct(Product product)
         {
             var productEntity = new ProductEntity
@@ -44,6 +65,39 @@ namespace AppStore.Backend.Repositories.Repositories
 
             return productEntity.IdProduct;
         }
+
+
+        public async Task<int> UpdateProduct(Product product)
+        {
+            var productEntity = new ProductEntity
+            {
+                IdProduct = product.IdProduct,
+                IdCategory = product.IdCategory,
+                InternalCode = product.InternalCode,
+                Name = product.Name,
+                Price = product.Price,
+                IdStock = product.IdStock,
+                Description = product.Description,
+                State = product.State,
+                IdSupplier = product.IdSupplier
+            };
+
+            await context.UpdateProductAsync(productEntity);
+            await context.SaveChangesAsync();
+
+            return productEntity.IdProduct;
+        }
+
+
+        public async Task<int> DeleteProduct(int idProduct)
+        {
+            await context.SoftDeleteProductAsync(idProduct);
+            await context.SaveChangesAsync();
+            return idProduct;
+        }
+
+
+
 
         public async Task<int> CreateCategory(Category category)
         {
@@ -90,5 +144,7 @@ namespace AppStore.Backend.Repositories.Repositories
         {
             await context.SaveChangesAsync();
         }
+
+      
     }
 }

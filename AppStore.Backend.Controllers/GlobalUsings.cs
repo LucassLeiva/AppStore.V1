@@ -1,3 +1,9 @@
-global using AppStore.Backend.BusinessObjects.Interfaces.CreateProduct;
 global using AppStore.Entities.DTOs.Products.CreateProduct;
 global using AppStore.Entities.ValueObjects;
+global using AppStore.Backend.BusinessObjects.Interfaces.Products.GetAll;
+global using AppStore.Backend.BusinessObjects.Interfaces.Products.UpdateProduct;
+global using AppStore.Entities.DTOs.Products.UpdateProduct;
+global using AppStore.Backend.BusinessObjects.Interfaces.Stocks.UpdateStock;
+global using AppStore.Entities.DTOs.Stock.UpdateStock;
+global using AppStore.Backend.BusinessObjects.Interfaces.Products.DeleteProduct;
+global using AppStore.Entities.DTOs.Products.DeleteProduct;

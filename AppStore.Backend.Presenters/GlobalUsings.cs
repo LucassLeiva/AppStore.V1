@@ -1,8 +1,7 @@
-global using AppStore.Backend.BusinessObjects.Interfaces.CreateProduct;
-global using AppStore.Backend.Presenters.CreateProduct;
-global using System;
-global using System.Collections.Generic;
-global using System.Linq;
-global using System.Text;
-global using System.Threading.Tasks;
 global using AppStore.Backend.BusinessObjects.POCOEntities;
+global using AppStore.Backend.Presenters.Products.CreateProduct;
+global using System.Threading.Tasks;
+global using AppStore.Backend.BusinessObjects.Interfaces.Products.GetAll;
+global using AppStore.Backend.BusinessObjects.Interfaces.Products.GetById;
+global using AppStore.Entities.DTOs.Products.GetProducts;
+global using AppStore.Entities.DTOs.Products.GetProducts.AppStore.Entities.DTOs.Products;

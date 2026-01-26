@@ -5,3 +5,4 @@ global using System;
 global using System.Threading.Tasks;
 global using AppStore.Validation.Entities.Interfaces;
 global using AppStore.Backend.BusinessObjects.ValueObjects;
+global using AppStore.Entities.DTOs.Products.UpdateProduct;
