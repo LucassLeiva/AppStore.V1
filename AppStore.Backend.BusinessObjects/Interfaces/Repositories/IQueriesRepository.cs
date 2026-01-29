@@ -1,5 +1,7 @@
 ﻿using AppStore.Entities.DTOs.Products.GetProducts.AppStore.Entities.DTOs.Products;
 using AppStore.Entities.DTOs.Products.GetProducts;
+using AppStore.Entities.DTOs.Categories.GetCategories;
+using AppStore.Entities.DTOs.Suppliers.GetSupplier;
 
 namespace AppStore.Backend.BusinessObjects.Interfaces.Repositories
 {
@@ -18,5 +20,12 @@ namespace AppStore.Backend.BusinessObjects.Interfaces.Repositories
         //Queries para Stock
         Task<int> GetStockIdByProductId(int idProduct);
         Task<bool> ProductExists(int idProduct);
+
+        //Queries para Categories
+        Task<IEnumerable<CategoryItemDto>> GetAllCategories(bool includeInactive);
+        Task<CategoryItemDto?> GetCategoryById(int idCategory);
+        //Queries para Suppliers
+        Task<IEnumerable<SupplierItemDto>> GetAllSuppliers(bool includeInactive);
+        Task<SupplierItemDto?> GetSupplierById(int idSupplier);
     }
 }

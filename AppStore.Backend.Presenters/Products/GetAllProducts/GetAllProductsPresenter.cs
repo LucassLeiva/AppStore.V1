@@ -2,9 +2,7 @@
 {
     internal class GetAllProductsPresenter : IGetAllProductsOutputPort
     {
-        public IEnumerable<ProductItemDto> Products { get; private set; }
-            = Array.Empty<ProductItemDto>();
-
+        public IEnumerable<ProductItemDto> Products { get; private set; } = [];
         public Task Handle(IEnumerable<ProductItemDto> products)
         {
             Products = products;

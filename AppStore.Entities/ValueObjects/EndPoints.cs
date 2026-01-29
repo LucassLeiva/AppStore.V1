@@ -22,11 +22,19 @@ namespace AppStore.Entities.ValueObjects
 
         //Categories
         public const string CreateCategory = $"/{nameof(CreateCategory)}";
+        public const string GetAllCategories = $"/{nameof(GetAllCategories)}";
+        public const string GetCategoryById = $"/{nameof(GetCategoryById)}/{{idCategory:int}}";
+        public const string UpdateCategory = $"/{nameof(UpdateCategory)}";
+        public const string DeleteCategory = $"/{nameof(DeleteCategory)}/{{idCategory:int}}";
 
 
 
         //Suppliers
         public const string CreateSupplier = $"/{nameof(CreateSupplier)}";
+        public const string GetAllSuppliers = $"/{nameof(GetAllSuppliers)}";
+        public const string GetSupplierById = $"/{nameof(GetSupplierById)}/{{idSupplier:int}}";
+        public const string UpdateSupplier = $"/{nameof(UpdateSupplier)}";
+        public const string DeleteSupplier = $"/{nameof(DeleteSupplier)}/{{idSupplier:int}}";
 
         //Stocks
         public const string UpdateStock = $"/{nameof(UpdateStock)}";

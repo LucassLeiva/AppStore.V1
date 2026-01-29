@@ -1,0 +1,20 @@
+﻿@using AppStore.Frontend.Views.Components.Product.GetAllProduct
+
+
+@page "/getallproducts"
+<PageTitle>GetAllProductsMessages.PageTitle</PageTitle>
+
+<ErrorBoundary @ref="ErrorBoundaryRef">
+    <ChildContent>
+        <GetAllProductsComponent Products="ViewModel" />
+    </ChildContent>
+
+    <ErrorContent>
+        <ExceptionDisplay Exception="context" />
+
+        <button class="btn btn-danger" @onclick="Recover">
+            @CommonMessages.OK
+        </button>
+    </ErrorContent>
+</ErrorBoundary>
+

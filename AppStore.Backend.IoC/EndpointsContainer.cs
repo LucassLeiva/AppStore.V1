@@ -1,11 +1,4 @@
-﻿using AppStore.Backend.Controllers.Products.CreateProduct;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Microsoft.AspNetCore.Builder;
+﻿namespace Microsoft.AspNetCore.Builder;
 public static class EndpointsContainer
 {
     public static WebApplication MapAppStoreEndpoints(
@@ -20,10 +13,18 @@ public static class EndpointsContainer
 
         //Categories Controllers
         app.UseCreateCategoryController();
+        app.UseGetAllCategoriesController();
+        app.UseGetCategoryByIdController();
+        app.UseUpdateCategoryController();
+        app.UseDeleteCategoryController();
 
 
         //Suppliers Controllers
         app.UseCreateSupplierController();
+        app.UseGetAllSuppliersController();
+        app.UseGetSupplierByIdController();
+        app.UseUpdateSupplierController();
+        app.UseDeleteSupplierController();
 
         //Stocks Controllers
         app.UseUpdateStockController();

@@ -1,17 +1,4 @@
-﻿using AppStore.Backend.BusinessObjects.Interfaces.CreateCategory;
-using AppStore.Backend.BusinessObjects.Interfaces.CreateSupplier;
-using AppStore.Backend.BusinessObjects.Interfaces.Products.CreateProduct;
-using AppStore.Backend.BusinessObjects.Interfaces.Products.UpdateProduct;
-using AppStore.Backend.UseCases.CreateCategory;
-using AppStore.Backend.UseCases.CreateSupplier;
-using AppStore.Backend.UseCases.Products.CreateProduct;
-using AppStore.Backend.UseCases.Products.DeleteProduct;
-using AppStore.Backend.UseCases.Products.GetAllProducts;
-using AppStore.Backend.UseCases.Products.GetProductById;
-using AppStore.Backend.UseCases.Products.UpdateProduct;
-using AppStore.Backend.UseCases.Stocks.UpdateStock;
-
-namespace Microsoft.Extensions.DependencyInjection;
+﻿namespace Microsoft.Extensions.DependencyInjection;
 public static class DependencyContainer
     {
         public static IServiceCollection AddUseCasesServices(
@@ -29,20 +16,27 @@ public static class DependencyContainer
             services.AddScoped<IUpdateStockInputPort, UpdateStockInteractor>();
 
 
-
+           //Servicios de Categories
             services.AddScoped<ICreateCategoryInputPort,CreateCategoryInteractor>();
+            services.AddScoped<IGetAllCategoriesInputPort, GetAllCategoriesInteractor>();
+            services.AddScoped<IGetCategoryByIdInputPort,GetCategoryByIdInteractor>();
+            services.AddScoped<IUpdateCategoryInputPort,UpdateCategoryInteractor>();
+            services.AddScoped<IDeleteCategoryInputPort, DeleteCategoryInteractor>();
+
+
+
+            //Servicios de Suppliers
             services.AddScoped<ICreateSupplierInputPort,CreateSupplierInteractor>();
-
-
-
-
-
+            services.AddScoped<IGetAllSuppliersInputPort,GetAllSuppliersInteractor>();
+            services.AddScoped<IGetSupplierByIdInputPort,GetSupplierByIdInteractor>();
+            services.AddScoped<IUpdateSupplierInputPort, UpdateSupplierInteractor>();
+            services.AddScoped<IDeleteSupplierInputPort, DeleteSupplierInteractor>();
 
 
 
 
         //Servicios de Validacion de Casos de Usos
-            services.AddModelValidator<CreateProductDto, CreateProductCategoryValidator>();
+        services.AddModelValidator<CreateProductDto, CreateProductCategoryValidator>();
             services.AddModelValidator<CreateProductDto, CreateProductSupplierValidator>();
             services.AddModelValidator<CreateProductDto, CreateProductInternalCodeValidator>();
 

@@ -1,19 +1,4 @@
-﻿using AppStore.Backend.BusinessObjects.Interfaces.CreateCategory;
-using AppStore.Backend.BusinessObjects.Interfaces.CreateSupplier;
-using AppStore.Backend.BusinessObjects.Interfaces.Products.CreateProduct;
-using AppStore.Backend.BusinessObjects.Interfaces.Products.DeleteProduct;
-using AppStore.Backend.BusinessObjects.Interfaces.Products.UpdateProduct;
-using AppStore.Backend.BusinessObjects.Interfaces.Stocks.UpdateStock;
-using AppStore.Backend.Presenters.CreateCategory;
-using AppStore.Backend.Presenters.CreateSupplier;
-using AppStore.Backend.Presenters.Products.CreateProduct;
-using AppStore.Backend.Presenters.Products.DeleteProduct;
-using AppStore.Backend.Presenters.Products.GetAllProducts;
-using AppStore.Backend.Presenters.Products.GetProductById;
-using AppStore.Backend.Presenters.Products.UpdateProduct;
-using AppStore.Backend.Presenters.Stock.UpdateStock;
-
-namespace Microsoft.Extensions.DependencyInjection;
+﻿namespace Microsoft.Extensions.DependencyInjection;
 public static class DependencyContainer
 {
     public static IServiceCollection AddPresenters(
@@ -28,6 +13,10 @@ public static class DependencyContainer
 
         //Servicios de Categories
         services.AddScoped<ICreateCategoryOutputPort, CreateCategoryPresenter>();
+        services.AddScoped<IGetAllCategoriesOutputPort,GetAllCategoriesPresenter>();
+        services.AddScoped<IGetCategoryByIdOutputPort,GetCategoryByIdPresenter>();   
+        services.AddScoped<IUpdateCategoryOutputPort,UpdateCategoryPresenter>();
+        services.AddScoped<IDeleteCategoryOutputPort, DeleteCategoryPresenter>();
 
         //Servucuis de Stocks
         services.AddScoped<IUpdateStockOutputPort, UpdateStockPresenter>();
@@ -35,6 +24,11 @@ public static class DependencyContainer
 
         //Servicios de Suppliers
         services.AddScoped<ICreateSupplierOutputPort, CreateSupplierPresenter>();
+        services.AddScoped<IGetAllSuppliersOutputPort, GetAllSuppliersPresenter>();
+        services.AddScoped<IGetSupplierByIdOutputPort, GetSupplierByIdPresenter>();
+        services.AddScoped<IUpdateSupplierOutputPort, UpdateSupplierPresenter>();
+        services.AddScoped<IDeleteSupplierOutputPort, DeleteSupplierPresenter>();
+
         return services;
     }
 }

@@ -1,7 +1,9 @@
 ﻿using AppStore.Backend.BusinessObjects.ValueObjects;
 using AppStore.Backend.Repositories.Interfaces;
+using AppStore.Entities.DTOs.Categories.GetCategories;
 using AppStore.Entities.DTOs.Products.GetProducts;
 using AppStore.Entities.DTOs.Products.GetProducts.AppStore.Entities.DTOs.Products;
+using AppStore.Entities.DTOs.Suppliers.GetSupplier;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,8 @@ namespace AppStore.Backend.Repositories.Repositories
     internal class QueriesRepository(IAppStoreQueriesDataContext context) : IQueriesRepository
 
     {
+
+        //Queries para Validaciones
         public async Task<IEnumerable<AvailableCategory>> GetAvailableCategories()
         {
             var Queryable = context.Category
@@ -25,8 +29,6 @@ namespace AppStore.Backend.Repositories.Repositories
 
             return await context.ToListAsync(Queryable);
         }
-
-
         public async Task<IEnumerable<AvailableSupplier>> GetAvailableSuppliers()
         {
             var Queryable = context.Supplier
@@ -48,6 +50,7 @@ namespace AppStore.Backend.Repositories.Repositories
         }
 
 
+        //Queries para PRODUCTS
         public async Task<IEnumerable<ProductItemDto>> GetAllProducts(bool includeInactive)
         {
             var queryable = 
@@ -71,7 +74,6 @@ namespace AppStore.Backend.Repositories.Repositories
 
             return await context.ToListAsync(queryable);
         }
-
 
         public async Task<ProductDetailsDto?> GetProductById(int idProduct)
         {
@@ -98,9 +100,6 @@ namespace AppStore.Backend.Repositories.Repositories
             return await context.FirstOrDefaultAsync(queryable);
         }
 
-
-
-
         public async Task<bool> ProductExists(int idProduct)
         {
             var queryable = context.Product
@@ -118,6 +117,79 @@ namespace AppStore.Backend.Repositories.Repositories
                 .Select(p => p.IdStock);
 
             // Si el producto no existe, FirstOrDefaultAsync devuelve 0 (default int)
+            return await context.FirstOrDefaultAsync(queryable);
+        }
+
+
+
+
+        //Queries para Categories
+
+        public async Task<IEnumerable<CategoryItemDto>> GetAllCategories(bool includeInactive)
+        {
+            var queryable = context.Category
+                .Where(c => includeInactive || c.State == 1)
+                .Select(c => new CategoryItemDto(
+                    c.IdCategory,
+                    c.Name,
+                    c.Description,
+                    c.State
+                ));
+
+            return await context.ToListAsync(queryable);
+        }
+
+        public async Task<CategoryItemDto?> GetCategoryById(int idCategory)
+        {
+            var queryable = context.Category
+                .Where(c => c.IdCategory == idCategory)
+                .Select(c => new CategoryItemDto(
+                    c.IdCategory,
+                    c.Name,
+                    c.Description,
+                    c.State));
+
+            return await context.FirstOrDefaultAsync(queryable);
+        }
+
+        //Queries para Suppliers
+        public async Task<IEnumerable<SupplierItemDto>> GetAllSuppliers(bool includeInactive)
+        {
+            var queryable = context.Supplier
+                .Where(s => includeInactive || s.State == 1)
+                .Select(s => new SupplierItemDto(
+                    s.IdSupplier,
+                    s.Name,
+                    s.CUIT,
+                    s.Address,
+                    s.PhoneNumber,
+                    s.Email,
+                    s.City,
+                    s.Country,
+                    s.Postcode,
+                    s.State
+                ));
+
+            return await context.ToListAsync(queryable);
+        }
+
+        public async Task<SupplierItemDto?> GetSupplierById(int idSupplier)
+        {
+            var queryable = context.Supplier
+                .Where(s => s.IdSupplier == idSupplier)
+                .Select(s => new SupplierItemDto(
+                    s.IdSupplier,
+                    s.Name,
+                    s.CUIT,
+                    s.Address,
+                    s.PhoneNumber,
+                    s.Email,
+                    s.City,
+                    s.Country,
+                    s.Postcode,
+                    s.State
+                ));
+
             return await context.FirstOrDefaultAsync(queryable);
         }
 

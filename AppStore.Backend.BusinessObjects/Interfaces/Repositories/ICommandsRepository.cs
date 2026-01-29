@@ -16,8 +16,12 @@ namespace AppStore.Backend.BusinessObjects.Interfaces.Repositories
 
         //Category Commands
         Task<int> CreateCategory(Category category);
+        Task<int> UpdateCategory(Category category);
+        Task<int> DeleteCategory(int idCategory);
 
         //Supplier Commands
         Task<int> CreateSupplier(Supplier supplier);
+        Task<int> UpdateSupplier(Supplier supplier);
+        Task<int> DeleteSupplier(int idSupplier);
     }
 }

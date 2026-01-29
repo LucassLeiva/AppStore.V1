@@ -9,13 +9,15 @@ namespace AppStore.Backend.BusinessObjects.POCOEntities
     public class Category
     {
         public int IdCategory { get; set; }
-        public string Name { get; private set; } = default!;
-        public string? Description { get; private set; }
+        public string Name { get; set; } 
+        public string? Description { get; set; }
         public int State { get; private set; } = 1;
 
         protected Category() { }
 
-        public Category(string name, string? description)
+        public Category(
+            string name,
+            string? description)
         {
             Name = name;
             Description = description;

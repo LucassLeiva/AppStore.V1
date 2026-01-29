@@ -1,4 +1,5 @@
-﻿<Router AppAssembly="@typeof(App).Assembly" 
+﻿@using AppStore.Frontend.Views.Pages.Product.CreateProduct
+<Router AppAssembly="@typeof(App).Assembly" 
         AdditionalAssemblies=AdditionalAssemblies>
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
@@ -15,7 +16,7 @@
     Assembly[] AdditionalAssemblies =>
     new Assembly[]
     {
-typeof(AppStore.Frontend.Views.Pages.CreateProduct)
+typeof(CreateProduct)
 .Assembly
     };
 }

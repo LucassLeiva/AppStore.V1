@@ -1,7 +1,4 @@
-﻿using AppStore.Backend.BusinessObjects.Interfaces.Products.GetById;
-using Microsoft.AspNetCore.Http;
-
-namespace Microsoft.AspNetCore.Builder
+﻿namespace Microsoft.AspNetCore.Builder
 {
     public static class GetProductByIdController
     {

@@ -4,3 +4,6 @@ global using System.Collections.Generic;
 global using System.Linq;
 global using System.Text;
 global using System.Threading.Tasks;
+global using AppStore.Backend.Controllers.Categories.GetCategoriesById.Microsoft.AspNetCore.Builder;
+global using AppStore.Backend.Controllers.Suppliers.CreateSupplier;
+global using AppStore.Backend.Controllers.Suppliers.UpdateSupplier.Microsoft.AspNetCore.Builder;

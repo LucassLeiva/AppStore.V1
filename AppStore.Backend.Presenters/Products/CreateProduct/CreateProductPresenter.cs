@@ -1,6 +1,4 @@
-﻿using AppStore.Backend.BusinessObjects.Interfaces.Products.CreateProduct;
-
-namespace AppStore.Backend.Presenters.Products.CreateProduct
+﻿namespace AppStore.Backend.Presenters.Products.CreateProduct
 {
     internal class CreateProductPresenter : ICreateProductOutputPort
     {

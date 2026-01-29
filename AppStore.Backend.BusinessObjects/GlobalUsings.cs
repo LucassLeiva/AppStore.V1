@@ -6,3 +6,8 @@ global using System.Threading.Tasks;
 global using AppStore.Validation.Entities.Interfaces;
 global using AppStore.Backend.BusinessObjects.ValueObjects;
 global using AppStore.Entities.DTOs.Products.UpdateProduct;
+global using AppStore.Entities.DTOs.Products.GetProducts.AppStore.Entities.DTOs.Products;
+global using AppStore.Entities.DTOs.Categories.GetCategories;
+global using AppStore.Entities.DTOs.Suppliers.GetSupplier;
+global using AppStore.Entities.DTOs.Suppliers.UpdateSupplier;
+global using AppStore.Entities.DTOs.Suppliers.DeleteSupplier;
