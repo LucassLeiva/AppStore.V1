@@ -18,8 +18,10 @@ namespace AppStore.Entities.DTOs.Products.GetProducts
         int idSupplier,
         string supplierName,
         string? description
+        
     )
     {
+        
         public int IdProduct => idProduct;
         public string InternalCode => internalCode;
         public string Name => name;
@@ -34,5 +36,6 @@ namespace AppStore.Entities.DTOs.Products.GetProducts
         public string SupplierName => supplierName;
 
         public string? Description => description;
+        
     }
 }

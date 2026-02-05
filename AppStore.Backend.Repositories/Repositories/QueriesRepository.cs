@@ -70,6 +70,8 @@ namespace AppStore.Backend.Repositories.Repositories
                     c.Name,
                     s.IdSupplier,
                     s.Name
+                    
+
                 );
 
             return await context.ToListAsync(queryable);
@@ -95,6 +97,9 @@ namespace AppStore.Backend.Repositories.Repositories
                     s.IdSupplier,
                     s.Name,
                     p.Description
+                   
+                    
+                    
                 );
 
             return await context.FirstOrDefaultAsync(queryable);

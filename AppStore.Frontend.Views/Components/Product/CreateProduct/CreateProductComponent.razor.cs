@@ -6,6 +6,8 @@ namespace AppStore.Frontend.Views.Components.Product.CreateProduct
     {
         [Parameter]
         public CreateProductViewModel Product { get; set; } = default!;
+        [Parameter]
+        public EventCallback OnCancel { get; set; }
     }
 
 

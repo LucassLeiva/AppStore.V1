@@ -44,3 +44,6 @@ global using AppStore.Backend.UseCases.Suppliers.DeleteSupplier;
 global using AppStore.Backend.UseCases.Suppliers.GetAllSuppliers;
 global using AppStore.Backend.UseCases.Suppliers.GetSupplierById;
 global using AppStore.Backend.UseCases.Suppliers.UpdateSupplier;
+global using AppStore.Entities.DTOs.Products.UpdateProduct;
+global using AppStore.Backend.BusinessObjects.Interfaces.Products.ActivateProduct;
+global using AppStore.Entities.DTOs.Products.ActivateProduct;

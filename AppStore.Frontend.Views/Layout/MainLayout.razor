@@ -2,13 +2,18 @@
 @inherits NavMenuLayout
 
 <SectionContent SectionId="NavBarBrandSection">
-<a class="navbar-brand" href="">
-@CommonMessages.NavBarBrandTitle
-</a>
+    <a class="navbar-brand d-flex align-items-center" href="">
+        <img src="images/apple-touch-icon.png"
+             alt="Logo"
+             height="32"
+             class="me-2" />
+        <span>@CommonMessages.NavBarBrandTitle</span>
+    </a>
 </SectionContent>
 
 <SectionContent SectionId="NavBarItemsSection">
-    <NavMenuItem HRef="" Match="NavLinkMatch.All">
+
+    <NavMenuItem HRef="/" Match="NavLinkMatch.All">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
              fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
             <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0
@@ -16,35 +21,40 @@
 .5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5
 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
         </svg>
-     @CommonMessages.HomeMenuItemTitle
-    </NavMenuItem>
-    <NavMenuItem HRef="createproduct">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-             fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
-            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-
-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0
-0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
-            <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-
-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-
-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0M7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0
-1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-
-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0" />
-        </svg>
-      @CreateProductMessages.CreateProductMenuItemTitle
+        @CommonMessages.HomeMenuItemTitle
     </NavMenuItem>
 
-
-    <NavMenuItem HRef="getallproducts">
+    <!-- Productos (LISTADO) -->
+    <NavMenuItem HRef="/getallproducts">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
              fill="currentColor" class="bi bi-box-seam" viewBox="0 0 16 16">
             <path d="M8.21.5a1 1 0 0 0-.42 0L1.5 1.75l6.5 1.5 6.5-1.5L8.21.5z" />
             <path d="M15 3.25 8.5 4.75v10.5l6.23-1.44A1 1 0 0 0 15.5 12.8V3.75a.5.5 0 0 0-.5-.5z" />
             <path d="M7.5 15.25V4.75L1 3.25a.5.5 0 0 0-.5.5v9.05a1 1 0 0 0 .77.97l6.23 1.44z" />
         </svg>
-        @GetAllProductsMessages.PageTitle
+        Productos
     </NavMenuItem>
-</SectionContent>
 
+    <!-- Categorías -->
+@*     <NavMenuItem HRef="categories">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+             fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
+            <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l6.414 6.414a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0L2.293 7.293A1 1 0 0 1 2 6.586V2z" />
+            <path d="M3.5 3.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+        </svg>
+        Categorías
+    </NavMenuItem>
+
+    <!-- Proveedores -->
+    <NavMenuItem HRef="suppliers">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+             fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
+            <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2H10v6h-1V3H1.5a.5.5 0 0 0-.5.5V10h1a2 2 0 0 1 4 0h4a2 2 0 0 1 4 0h.5a.5.5 0 0 0 .5-.5V7h-2.5a.5.5 0 0 1-.5-.5V4h-1v3H10V2h1.5a1 1 0 0 1 1.2.8L14.5 6H15a1 1 0 0 1 1 1v2.5A1.5 1.5 0 0 1 14.5 11H14a2 2 0 0 1-4 0H6a2 2 0 0 1-4 0H1.5A1.5 1.5 0 0 1 0 9.5v-6z" />
+        </svg>
+        Proveedores
+    </NavMenuItem> *@
+
+</SectionContent>
 <SectionContent SectionId="HeaderSection">
     <a href="https://learn.microsoft.com/aspnet/core/"
        target="_blank">

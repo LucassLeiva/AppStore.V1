@@ -162,4 +162,7 @@
   <data name="SupplierLabel" xml:space="preserve">
     <value>Proveedor</value>
   </data>
+  <data name="CancelButtonText" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
 </root>

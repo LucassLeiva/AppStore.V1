@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CreateProduct\**" />
+    <EmbeddedResource Remove="CreateProduct\**" />
+    <None Remove="CreateProduct\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AppStore.Entities\AppStore.Entities.csproj" />
     <ProjectReference Include="..\AppStore.Validation.Entities\AppStore.Validation.Entities.csproj" />
   </ItemGroup>

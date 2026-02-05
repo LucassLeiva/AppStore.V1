@@ -14,9 +14,10 @@ namespace AppStore.Entities.ValueObjects
         //Products
         public const string CreateProduct = $"/{nameof(CreateProduct)}";
         public const string GetAllProducts = $"/{nameof(GetAllProducts)}";
-        public const string GetProductById = $"/{nameof(GetProductById)}/{{idProduct:int}}";
+        public const string GetProductById = $"/{nameof(GetProductById)}";
         public const string UpdateProduct = $"/{nameof(UpdateProduct)}";
-        public const string DeleteProduct = $"/{nameof(DeleteProduct)}/{{idProduct:int}}";
+        public const string DeleteProduct = $"/{nameof(DeleteProduct)}";
+        public const string ActivateProduct = $"/{nameof(ActivateProduct)}";
 
 
 

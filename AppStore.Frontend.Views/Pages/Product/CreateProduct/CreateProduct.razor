@@ -4,7 +4,8 @@
 <PageTitle>@CreateProductMessages.CreateProductPageTitle</PageTitle>
 <ErrorBoundary @ref=ErrorBoundaryRef>
     <ChildContent>
-        <CreateProductComponent Product=ViewModel/>
+        <CreateProductComponent Product="ViewModel"
+                                OnCancel="GoToGetAllProducts"/>
     </ChildContent> 
     <ErrorContent>
         <ExceptionDisplay Exception=context />

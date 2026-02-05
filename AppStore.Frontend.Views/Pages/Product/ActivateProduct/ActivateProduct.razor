@@ -1,0 +1,23 @@
+﻿@using AppStore.Frontend.Views.Components.Product.ActivateProduct
+@using AppStore.Frontend.Views.Resources.Product.ActivateProduct
+
+@page "/products/activate/{IdProduct:int}"
+<PageTitle>@ActivateProductMessages.ConfirmActivateTitle</PageTitle>
+
+<ErrorBoundary @ref="ErrorBoundaryRef">
+    <ChildContent>
+        <ActivateProductComponent Model="ViewModel"
+                                  IdProduct="IdProduct"
+                                  Show="true"
+                                  OnCancel="GoBack"
+                                  OnActivated="AfterActivated" />
+    </ChildContent>
+
+    <ErrorContent>
+        <ExceptionDisplay Exception="context" />
+
+        <button class="btn btn-danger" @onclick="Recover">
+            @CommonMessages.OK
+        </button>
+    </ErrorContent>
+</ErrorBoundary>

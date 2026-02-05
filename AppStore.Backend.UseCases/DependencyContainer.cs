@@ -1,4 +1,6 @@
-﻿namespace Microsoft.Extensions.DependencyInjection;
+﻿using AppStore.Backend.UseCases.Products.ActivateProduct;
+
+namespace Microsoft.Extensions.DependencyInjection;
 public static class DependencyContainer
     {
         public static IServiceCollection AddUseCasesServices(
@@ -10,6 +12,7 @@ public static class DependencyContainer
             services.AddScoped<IGetProductByIdInputPort, GetProductByIdInteractor>();
             services.AddScoped<IUpdateProductInputPort, UpdateProductInteractor>();
             services.AddScoped<IDeleteProductInputPort,DeleteProductInteractor>();
+            services.AddScoped<IActivateProductInputPort,ActivateProductInteractor>();
 
 
             //Servicios de Stocks

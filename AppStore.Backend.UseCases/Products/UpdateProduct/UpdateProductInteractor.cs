@@ -1,12 +1,4 @@
-﻿using AppStore.Backend.BusinessObjects.Interfaces.Products.UpdateProduct;
-using AppStore.Entities.DTOs.Products.UpdateProduct;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AppStore.Backend.UseCases.Products.UpdateProduct
+﻿namespace AppStore.Backend.UseCases.Products.UpdateProduct
 {
     internal class UpdateProductInteractor(
        IUpdateProductOutputPort outputPort,

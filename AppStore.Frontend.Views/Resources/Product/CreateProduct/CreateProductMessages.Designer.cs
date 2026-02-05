@@ -61,6 +61,15 @@ namespace AppStore.Frontend.Views.Resources.Product.CreateProduct {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cancelar.
+        /// </summary>
+        internal static string CancelButtonText {
+            get {
+                return ResourceManager.GetString("CancelButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Categoría.
         /// </summary>
         internal static string CategoryLabel {

@@ -10,6 +10,7 @@ public static class DependencyContainer
         services.AddScoped<IGetProductByIdOutputPort,GetProductByIdPresenter>();
         services.AddScoped<IUpdateProductOutputPort,UpdateProductPresenter>();
         services.AddScoped<IDeleteProductOutputPort,DeleteProductPresenter>();
+        services.AddScoped<IActivateProductOutputPort, ActivateProductPresenter>();
 
         //Servicios de Categories
         services.AddScoped<ICreateCategoryOutputPort, CreateCategoryPresenter>();

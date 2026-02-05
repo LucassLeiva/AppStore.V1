@@ -1,6 +1,10 @@
-﻿@using AppStore.Frontend.Views.Pages.Product.CreateProduct
+﻿@using AppStore.Frontend.Views.Pages.Product.ActivateProduct
+@using AppStore.Frontend.Views.Pages.Product.CreateProduct
+@using AppStore.Frontend.Views.Pages.Product.DeleteProduct
+@using AppStore.Frontend.Views.Pages.Product.GetAllProducts
+@using AppStore.Frontend.Views.Pages.Product.UpdateProduct
 <Router AppAssembly="@typeof(App).Assembly" 
-        AdditionalAssemblies=AdditionalAssemblies>
+AdditionalAssemblies=AdditionalAssemblies>
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
@@ -17,6 +21,15 @@
     new Assembly[]
     {
 typeof(CreateProduct)
+.Assembly,
+typeof(GetAllProducts)
+.Assembly,
+typeof(UpdateProduct)
+.Assembly,
+typeof(DeleteProduct)
+.Assembly,
+typeof(ActivateProduct)
 .Assembly
+
     };
 }

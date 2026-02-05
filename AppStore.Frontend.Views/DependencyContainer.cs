@@ -1,4 +1,4 @@
-﻿using AppStore.Frontend.Views.ViewModels.Product.CreateProduct;
+﻿using AppStore.Frontend.Views.ViewModels.Product.DeleteProduct;
 
 namespace Microsoft.Extensions.DependencyInjection;
 public static class DependencyContainer
@@ -8,6 +8,9 @@ public static class DependencyContainer
     {
         services.AddScoped<CreateProductViewModel>();
         services.AddScoped<GetAllProductsViewModel>();
+        services.AddScoped<UpdateProductViewModel>();
+        services.AddScoped<DeleteProductViewModel>();
+        services.AddScoped<ActivateProductViewModel>();
 
 
 

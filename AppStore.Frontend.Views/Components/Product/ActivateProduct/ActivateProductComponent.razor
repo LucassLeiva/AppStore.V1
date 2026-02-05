@@ -1,0 +1,61 @@
+﻿@using AppStore.Frontend.Views.Resources.Product.ActivateProduct
+@using AppStore.Frontend.Views.ViewModels.Product.ActivateProduct
+
+@if (Show)
+{
+    <!-- Backdrop -->
+    <div class="modal-backdrop fade show"></div>
+
+    <!-- Modal -->
+    <div class="modal fade show d-block" tabindex="-1" role="dialog" aria-modal="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">@ActivateProductMessages.ConfirmActivateTitle</h5>
+                    <button type="button" class="btn-close" @onclick="CancelInternal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <p>@ActivateProductMessages.ConfirmActivateMessage</p>
+
+                    <div class="alert alert-success mb-0">
+                        @ActivateProductMessages.ConfirmActivateWarning
+
+                        <p class="text-muted mb-0">
+                            <strong>@ActivateProductMessages.ProductNameLabel:</strong>
+                            @Model.ProductName
+                        </p>
+
+                        <p class="text-muted mb-0">
+                            <strong>@ActivateProductMessages.ProductIdLabel:</strong>
+                            @IdProduct
+                        </p>
+                    </div>
+
+                    @if (!string.IsNullOrWhiteSpace(Model.InformationMessage))
+                    {
+                        <div class="alert alert-info mt-3">
+                            @Model.InformationMessage
+                        </div>
+                    }
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-outline-secondary"
+                            @onclick="CancelInternal"
+                            disabled="@IsBusy">
+                        @ActivateProductMessages.CancelButtonText
+                    </button>
+
+                    <button class="btn btn-success"
+                            @onclick="ActivateInternal"
+                            disabled="@IsBusy">
+                        @ActivateProductMessages.ActivateButtonText
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

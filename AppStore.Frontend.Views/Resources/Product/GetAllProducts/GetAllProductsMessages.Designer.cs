@@ -97,7 +97,7 @@ namespace AppStore.Frontend.Views.Resources.Product.GetAllProducts {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a IdProduct.
+        ///   Busca una cadena traducida similar a Id de Producto.
         /// </summary>
         internal static string IdLabel {
             get {
@@ -133,6 +133,15 @@ namespace AppStore.Frontend.Views.Resources.Product.GetAllProducts {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Codigo Interno.
+        /// </summary>
+        internal static string InternalCodeLabel {
+            get {
+                return ResourceManager.GetString("InternalCodeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cargar productos.
         /// </summary>
         internal static string LoadButtonText {
@@ -151,7 +160,7 @@ namespace AppStore.Frontend.Views.Resources.Product.GetAllProducts {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Listar Productos.
+        ///   Busca una cadena traducida similar a Lista de Productos.
         /// </summary>
         internal static string PageTitle {
             get {

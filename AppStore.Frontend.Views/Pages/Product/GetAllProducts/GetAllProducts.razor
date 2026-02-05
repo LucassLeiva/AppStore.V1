@@ -1,12 +1,17 @@
-﻿@using AppStore.Frontend.Views.Components.Product.GetAllProduct
-
+﻿@using AppStore.Frontend.Views.Components.Product.GetAllProducts
+@using AppStore.Frontend.Views.Resources
 
 @page "/getallproducts"
-<PageTitle>GetAllProductsMessages.PageTitle</PageTitle>
+
+<PageTitle>@GetAllProductsMessages.PageTitle</PageTitle>
 
 <ErrorBoundary @ref="ErrorBoundaryRef">
     <ChildContent>
-        <GetAllProductsComponent Products="ViewModel" />
+        <GetAllProductsComponent Products="ViewModel"
+                                 OnCreate="GoToCreate"
+                                 OnEdit="GoToEdit"
+                                 OnDelete="GoToDelete"
+                                 OnActivate="GoToActivate"/>
     </ChildContent>
 
     <ErrorContent>
@@ -17,4 +22,3 @@
         </button>
     </ErrorContent>
 </ErrorBoundary>
-

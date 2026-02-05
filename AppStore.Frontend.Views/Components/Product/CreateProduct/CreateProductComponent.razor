@@ -5,10 +5,26 @@
         <label for="idCategory">
             @CreateProductMessages.CategoryLabel
         </label>
-        <InputNumber class="form-control" id="idCategory"
-                     placeholder="@CreateProductMessages.CategoryLabel"
-                     @bind-Value="Product.IdCategory" />
+        <InputSelect class="form-select" @bind-Value="Product.IdCategory">
+            @foreach (var c in Product.Categories)
+            {
+              <option value="@c.IdCategory">@c.Name</option>
+            }
+        </InputSelect>    
         <ValidationMessage For="() => Product.IdCategory" />
+    </div>
+
+    <div class="form-group">
+        <label for="idSupplier">
+            @CreateProductMessages.SupplierLabel
+        </label>
+        <InputSelect class="form-select" @bind-Value="Product.IdSupplier">
+            @foreach (var s in Product.Suppliers)
+            {
+                <option value="@s.IdSupplier">@s.Name</option>
+            }
+        </InputSelect>
+        <ValidationMessage For="() => Product.IdSupplier" />
     </div>
 
     <div class="form-group">
@@ -50,16 +66,6 @@
     </div>
 
     <div class="form-group">
-        <label for="idSupplier">
-            @CreateProductMessages.SupplierLabel
-        </label>
-        <InputNumber class="form-control" id="idSupplier"
-                     placeholder="@CreateProductMessages.SupplierLabel"
-                     @bind-Value="Product.IdSupplier" />
-        <ValidationMessage For="() => Product.IdSupplier" />
-    </div>
-
-    <div class="form-group">
         <label for="description">
             @CreateProductMessages.DescriptionLabel
         </label>
@@ -72,15 +78,20 @@
         <label for="state">
             @CreateProductMessages.StateLabel
         </label>
-        <InputNumber class="form-control" id="state"
-                     placeholder="@CreateProductMessages.StateLabel"
-                     @bind-Value="Product.State" />
+        <InputSelect class="form-select" @bind-Value="Product.State">
+            <option value="1">Activo</option>
+            <option value="0">Inactivo</option>
+        </InputSelect>
     </div>
 
     <div class="row p-3">
         <div class="col">
             <button type="submit" class="btn btn-primary">
                 @CreateProductMessages.SaveButtonText
+            </button>
+            <button type="button" class="btn btn-outline-secondary ms-2"
+                    @onclick="Cancel">
+                @CreateProductMessages.CancelButtonText
             </button>
         </div>
     </div>
@@ -94,5 +105,9 @@
     <div class="alert alert-info">
         @Product.InformationMessage
     </div>
+}
+@code {
+    private Task Cancel()
+        => OnCancel.HasDelegate ? OnCancel.InvokeAsync() : Task.CompletedTask;
 }
 

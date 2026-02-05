@@ -130,7 +130,7 @@
     <value>Ocurrió un error al cargar los productos</value>
   </data>
   <data name="IdLabel" xml:space="preserve">
-    <value>IdProduct</value>
+    <value>Id de Producto</value>
   </data>
   <data name="InactiveText" xml:space="preserve">
     <value>Inactivo</value>
@@ -141,6 +141,9 @@
   <data name="Incluir productos inactivos" xml:space="preserve">
     <value>Incluir productos inactivos</value>
   </data>
+  <data name="InternalCodeLabel" xml:space="preserve">
+    <value>Codigo Interno</value>
+  </data>
   <data name="LoadButtonText" xml:space="preserve">
     <value>Cargar productos</value>
   </data>
@@ -148,7 +151,7 @@
     <value>Nombre</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
-    <value>Listar Productos</value>
+    <value>Lista de Productos</value>
   </data>
   <data name="PriceLabel" xml:space="preserve">
     <value>Precio</value>

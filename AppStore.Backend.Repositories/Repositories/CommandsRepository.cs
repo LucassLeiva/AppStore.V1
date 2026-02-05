@@ -1,4 +1,6 @@
-﻿namespace AppStore.Backend.Repositories.Repositories
+﻿using AppStore.Backend.BusinessObjects.POCOEntities;
+
+namespace AppStore.Backend.Repositories.Repositories
 {
 
     // ESTA CLASE ES UN TRADUCTOR O ADAPTADOR: ENTRE EL NEGOCIO(LO QUE SE QUIERE HACER EJ: CREAR PRODUCTO, GUARDAR STOCK) Y LA PERSISTENCIA(LO QUE SE ALMACENA EN LA BASE DE DATOS, Solo sabe guardar y leer datos)
@@ -30,22 +32,18 @@
 
         public async Task<int> UpdateProduct(Product product)
         {
-            var productEntity = new ProductEntity
-            {
-                IdProduct = product.IdProduct,
-                IdCategory = product.IdCategory,
-                InternalCode = product.InternalCode,
-                Name = product.Name,
-                Price = product.Price,
-                IdStock = product.IdStock,
-                Description = product.Description,
-                State = product.State,
-                IdSupplier = product.IdSupplier
-            };
+            var productEntity = await context.FindProductByIdAsync(product.IdProduct);
+            if (productEntity == null)
+                throw new InvalidOperationException("Producto no encontrado.");
 
-            await context.UpdateProductAsync(productEntity);
+            productEntity.IdCategory = product.IdCategory;
+            productEntity.InternalCode = product.InternalCode;
+            productEntity.Name = product.Name;
+            productEntity.Price = product.Price;
+            productEntity.Description = product.Description;
+            productEntity.IdSupplier = product.IdSupplier;
+
             await context.SaveChangesAsync();
-
             return productEntity.IdProduct;
         }
 
@@ -125,7 +123,7 @@
 
             return entity.IdCategory;
         }
-
+        
 
         public async Task<int> DeleteCategory(int idCategory)
         {

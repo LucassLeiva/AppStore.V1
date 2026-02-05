@@ -11,7 +11,7 @@ namespace AppStore.Entities.DTOs.Products.UpdateProduct
         int idCategory,
         string internalCode,
         string name,
-        decimal price,
+        decimal price,   
         string? description,
         int idSupplier
     )
@@ -25,3 +25,4 @@ namespace AppStore.Entities.DTOs.Products.UpdateProduct
         public int IdSupplier => idSupplier;
     }
 }
+

@@ -11,3 +11,4 @@ global using AppStore.Entities.DTOs.Categories.GetCategories;
 global using AppStore.Entities.DTOs.Suppliers.GetSupplier;
 global using AppStore.Entities.DTOs.Suppliers.UpdateSupplier;
 global using AppStore.Entities.DTOs.Suppliers.DeleteSupplier;
+global using AppStore.Entities.DTOs.Products.ActivateProduct;

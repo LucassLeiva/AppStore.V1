@@ -1,0 +1,25 @@
+﻿
+@using AppStore.Frontend.Views.Components.Product.UpdateProduct
+@using AppStore.Frontend.Views.Resources.Product.UpdateProduct
+@page "/products/update/{idProduct:int}"
+
+<PageTitle>@UpdateProductMessages.UpdateProductPageTitle</PageTitle>
+
+<ErrorBoundary @ref="ErrorBoundaryRef">
+    <ChildContent>
+        <UpdateProductComponent Model="ViewModel"
+                                OnCancel="GoBack"/>
+    </ChildContent>
+
+    <ErrorContent>
+        <ExceptionDisplay Exception="context" />
+
+        <button class="btn btn-danger" @onclick="Recover">
+            @CommonMessages.OK
+        </button>
+    </ErrorContent>
+</ErrorBoundary>
+
+@code {
+    [Parameter] public int idProduct { get; set; }
+}

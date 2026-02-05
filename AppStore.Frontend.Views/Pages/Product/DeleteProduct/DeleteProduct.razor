@@ -1,0 +1,24 @@
+﻿@using AppStore.Frontend.Views.Components.Product.DeleteProduct
+@using AppStore.Frontend.Views.Resources.Product.DeleteProduct
+
+@page "/products/delete/{IdProduct:int}"
+<PageTitle>@DeleteProductMessages.DeleteProductPageTitle</PageTitle>
+
+<ErrorBoundary @ref="ErrorBoundaryRef">
+    <ChildContent>
+        <DeleteProductComponent Model="ViewModel"
+                                IdProduct="IdProduct"
+                                
+                                Show="true"
+                                OnCancel="GoBack"
+                                OnDeleted="AfterDeleted" />
+    </ChildContent>
+
+    <ErrorContent>
+        <ExceptionDisplay Exception="context" />
+
+        <button class="btn btn-danger" @onclick="Recover">
+            @CommonMessages.OK
+        </button>
+    </ErrorContent>
+</ErrorBoundary>
