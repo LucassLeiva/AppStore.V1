@@ -16,6 +16,7 @@ public static class DependencyContainer
 
         //Servicio de Validacion del ViewModel
         services.AddModelValidator<CreateProductViewModel, CreateProductViewModelValidator>();
+        services.AddModelValidator<UpdateProductViewModel, UpdateProductViewModelValidator>();
         
 
         return services;

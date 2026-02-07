@@ -1,11 +1,4 @@
-﻿using AppStore.Backend.BusinessObjects.Interfaces.Products.UpdateProduct;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AppStore.Backend.Presenters.Products.UpdateProduct
+﻿namespace AppStore.Backend.Presenters.Products.UpdateProduct
 {
     internal class UpdateProductPresenter : IUpdateProductOutputPort
     {

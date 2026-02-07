@@ -18,17 +18,53 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\CreateProductMessages.Designer.cs">
+    <Compile Update="Resources\Product\ActivateProduct\ActivateProductMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ActivateProductMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Product\CreateProduct\CreateProductMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>CreateProductMessages.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Product\DeleteProduct\DeleteProductMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DeleteProductMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Product\UpdateProduct\UpdateProductMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UpdateProductMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Stock\UpdateStock\UpdateStockMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UpdateStockMessages.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\CreateProductMessages.resx">
+    <EmbeddedResource Update="Resources\Product\ActivateProduct\ActivateProductMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ActivateProductMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Product\CreateProduct\CreateProductMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CreateProductMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Product\DeleteProduct\DeleteProductMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DeleteProductMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Product\UpdateProduct\UpdateProductMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UpdateProductMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Stock\UpdateStock\UpdateStockMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UpdateStockMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

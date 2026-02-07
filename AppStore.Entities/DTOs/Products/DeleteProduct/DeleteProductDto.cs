@@ -9,6 +9,6 @@ namespace AppStore.Entities.DTOs.Products.DeleteProduct
     public class DeleteProductDto(int idProduct)
     {
         public int IdProduct => idProduct;
-        public string Name => Name;
+        
     }
 }

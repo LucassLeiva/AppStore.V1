@@ -21,7 +21,10 @@ namespace AppStore.Backend.DataContexts.EFCore.Services
             public async Task SoftDeleteProductAsync(int idProduct)
             {
                 var entity = await FindProductByIdAsync(idProduct);
-                entity!.State = 0;
+                if (entity == null)
+                throw new Exception("El producto no existe.");
+
+                entity.State = 0;
             }
 
 

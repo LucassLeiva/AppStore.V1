@@ -50,7 +50,8 @@ namespace AppStore.Backend.Repositories.Repositories
         public async Task UpdateProductState(int idProduct, int state)
         {
             var product = await context.FindProductByIdAsync(idProduct);
-            if (product == null) throw new InvalidOperationException("Producto no encontrado.");
+            if (product == null) 
+            throw new InvalidOperationException("Producto no encontrado.");
 
             product.State = state;
 

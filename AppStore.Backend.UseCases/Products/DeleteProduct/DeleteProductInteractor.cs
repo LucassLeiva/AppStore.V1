@@ -1,12 +1,16 @@
-﻿namespace AppStore.Backend.UseCases.Products.DeleteProduct
+﻿using AppStore.Validation.Entities.Interfaces;
+
+namespace AppStore.Backend.UseCases.Products.DeleteProduct
 {
     internal class DeleteProductInteractor(
         IDeleteProductOutputPort outputPort,
-        ICommandsRepository repository) : IDeleteProductInputPort
+        ICommandsRepository repository,
+        IModelValidatorHub<DeleteProductDto> modelValidatorHub) : IDeleteProductInputPort
     {
-        public async Task Handle(DeleteProductDto dto)
+        public async Task Handle(DeleteProductDto deleteProductDto)
         {
-            int id = await repository.DeleteProduct(dto.IdProduct);
+            await GuardModel.AgainstNotValid(modelValidatorHub, deleteProductDto);
+            int id = await repository.DeleteProduct(deleteProductDto.IdProduct);
             await outputPort.Handle(id);
         }
     }

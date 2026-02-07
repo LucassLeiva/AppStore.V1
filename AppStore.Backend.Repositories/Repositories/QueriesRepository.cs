@@ -1,14 +1,5 @@
-﻿using AppStore.Backend.BusinessObjects.ValueObjects;
-using AppStore.Backend.Repositories.Interfaces;
-using AppStore.Entities.DTOs.Categories.GetCategories;
-using AppStore.Entities.DTOs.Products.GetProducts;
-using AppStore.Entities.DTOs.Products.GetProducts.AppStore.Entities.DTOs.Products;
-using AppStore.Entities.DTOs.Suppliers.GetSupplier;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//Preguntar si esta bien implementar EntityFrameworkCore en esta capa
+//using Microsoft.EntityFrameworkCore;
 
 namespace AppStore.Backend.Repositories.Repositories
 {
@@ -19,31 +10,32 @@ namespace AppStore.Backend.Repositories.Repositories
         //Queries para Validaciones
         public async Task<IEnumerable<AvailableCategory>> GetAvailableCategories()
         {
-            var Queryable = context.Category
-                // si tenés soft delete / active flag, lo filtrás acá:
-                // .Where(c => c.IsActive)
+            var queryable = context.Category
+                .Where(c => c.State == 1)
                 .Select(c => new AvailableCategory(
                     c.IdCategory,
                     c.Name
                 ));
 
-            return await context.ToListAsync(Queryable);
+            return await context.ToListAsync(queryable);
         }
+
+
         public async Task<IEnumerable<AvailableSupplier>> GetAvailableSuppliers()
         {
-            var Queryable = context.Supplier
-                // si aplica:
-                // .Where(s => s.IsActive)
+            var queryable = context.Supplier
+                .Where(c => c.State == 1  )
                 .Select(s => new AvailableSupplier(
                     s.IdSupplier,
                     s.Name
                 ));
 
-            return await context.ToListAsync(Queryable);
+            return await context.ToListAsync(queryable);
         }
         public async Task<IEnumerable<AvailableProduct>> GetAvailableProducts()
         {
             var queryable = context.Product
+                
                 .Select(p => new AvailableProduct(p.IdProduct, p.InternalCode));
 
             return await context.ToListAsync(queryable);

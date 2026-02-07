@@ -2,13 +2,15 @@
 {
     internal class ActivateProductInteractor(
         ICommandsRepository commands,
-        IActivateProductOutputPort outputPort)
+        IActivateProductOutputPort outputPort,
+        IModelValidatorHub<ActivateProductDto> modelValidatorHub)
         : IActivateProductInputPort
     {
-        public async Task Handle(ActivateProductDto dto)
+        public async Task Handle(ActivateProductDto activateProductDto)
         {
-            await commands.UpdateProductState(dto.IdProduct, 1);
-            await outputPort.Handle(dto.IdProduct);
+            await GuardModel.AgainstNotValid(modelValidatorHub, activateProductDto);
+            await commands.UpdateProductState(activateProductDto.IdProduct, 1);
+            await outputPort.Handle(activateProductDto.IdProduct);
         }
     }
 }

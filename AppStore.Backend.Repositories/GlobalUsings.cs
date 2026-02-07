@@ -5,3 +5,8 @@ global using System.Collections.Generic;
 global using System.Threading.Tasks;
 global using AppStore.Backend.BusinessObjects.POCOEntities;
 global using AppStore.Backend.Repositories.Interfaces;
+global using AppStore.Backend.BusinessObjects.ValueObjects.Product;
+global using AppStore.Entities.DTOs.Categories.GetCategories;
+global using AppStore.Entities.DTOs.Products.GetProducts;
+global using AppStore.Entities.DTOs.Products.GetProducts.AppStore.Entities.DTOs.Products;
+global using AppStore.Entities.DTOs.Suppliers.GetSupplier;

@@ -1,6 +1,4 @@
-﻿using AppStore.Backend.UseCases.Products.ActivateProduct;
-
-namespace Microsoft.Extensions.DependencyInjection;
+﻿namespace Microsoft.Extensions.DependencyInjection;
 public static class DependencyContainer
     {
         public static IServiceCollection AddUseCasesServices(
@@ -39,9 +37,21 @@ public static class DependencyContainer
 
 
         //Servicios de Validacion de Casos de Usos
-        services.AddModelValidator<CreateProductDto, CreateProductCategoryValidator>();
+        //Servicios de CreateProduct
+            services.AddModelValidator<CreateProductDto, CreateProductCategoryValidator>();
             services.AddModelValidator<CreateProductDto, CreateProductSupplierValidator>();
             services.AddModelValidator<CreateProductDto, CreateProductInternalCodeValidator>();
+
+        //Servicios de UpdateProduct
+        services.AddModelValidator<UpdateProductDto, UpdateProductCategoryValidator>();
+        services.AddModelValidator<UpdateProductDto, UpdateProductSupplierValidator>();
+        services.AddModelValidator<UpdateProductDto, UpdateProductInternalCodeValidator>();
+        //Servicios de DeleteProduct
+        services.AddModelValidator<DeleteProductDto, DeleteProductExistsValidator>();
+        //Servicios de ActivateProduct
+        services.AddModelValidator<ActivateProductDto, ActivateProductExistsValidator>();
+        //Servicios de UpdateStock
+        services.AddModelValidator<UpdateStockDto, UpdateStockProductExistsValidator>();
 
         return services;
         }

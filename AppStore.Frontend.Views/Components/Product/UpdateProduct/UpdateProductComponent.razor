@@ -11,6 +11,11 @@
 }
 
 <EditForm Model="Model" OnValidSubmit="SaveInternal">
+
+   
+    <ModelValidator Validator="Model.Validator" />
+    @* Para mostrar el mensaje arriba de forma general *@
+    @* <ValidationSummary /> *@
     <div class="row g-3">
 
         @* <div class="col-12 col-md-3">
@@ -21,37 +26,60 @@
         <div class="col-12 col-md-3">
             <label class="form-label">@UpdateProductMessages.InternalCodeLabel</label>
             <InputText class="form-control" @bind-Value="Model.InternalCode" />
+            <ValidationMessage For="() => Model.InternalCode" />
         </div>
 
         <div class="col-12 col-md-6">
             <label class="form-label">@UpdateProductMessages.NameLabel</label>
             <InputText class="form-control" @bind-Value="Model.Name" />
+            <ValidationMessage For="() => Model.Name" />
         </div>
 
         <div class="col-12 col-md-3">
             <label class="form-label">@UpdateProductMessages.PriceLabel</label>
-            <InputNumber class="form-control" @bind-Value="Model.Price" />
+            <InputNumber class="form-control" @bind-Value="Model.Price" min="0" />
+            <ValidationMessage For="() => Model.Price" />
         </div>
 
 
         <div class="col-12 col-md-3">
             <label class="form-label">@UpdateProductMessages.StockAmountLabel</label>
-            <InputNumber class="form-control" @bind-Value="Model.StockAmount" />
+            <InputNumber class="form-control" @bind-Value="Model.StockAmount" min="0" />
+            <ValidationMessage For="() => Model.StockAmount" />
         </div>
 
         <div class="col-12 col-md-6">
             <label class="form-label">@UpdateProductMessages.DescriptionLabel</label>
             <InputTextArea class="form-control" @bind-Value="Model.Description" rows="3" />
+            <ValidationMessage For="() => Model.Description" />
         </div>
 
         <div class="col-12 col-md-6">
             <label class="form-label">@UpdateProductMessages.CategoryIdLabel</label>
-            <input class="form-control" value="@Model.CategoryName" disabled />
+
+            <InputSelect class="form-select"
+                         @bind-Value="Model.IdCategory">
+
+                @foreach (var c in Model.Categories)
+                {
+                    <option value="@c.IdCategory">@c.Name</option>
+                }
+
+            </InputSelect>
         </div>
 
         <div class="col-12 col-md-6">
             <label class="form-label">@UpdateProductMessages.SupplierIdLabel</label>
-            <input class="form-control" value="@Model.SupplierName" disabled />
+
+            <InputSelect class="form-select"
+                         @bind-Value="Model.IdSupplier">
+
+                @foreach (var s in Model.Suppliers)
+                {
+                    <option value="@s.IdSupplier">@s.Name</option>
+                }
+
+            </InputSelect>
         </div>
 
         <div class="col-12 d-flex gap-2 justify-content-end mt-3">

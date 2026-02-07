@@ -3,17 +3,18 @@
     internal class UpdateStockInteractor(
          ICommandsRepository commands,
          IQueriesRepository queries,
-         IUpdateStockOutputPort outputPort)
+         IUpdateStockOutputPort outputPort,
+         IModelValidatorHub<UpdateStockDto> modelValidatorHub)
          : IUpdateStockInputPort
     {
-        public async Task Handle(UpdateStockDto dto)
+        public async Task Handle(UpdateStockDto updateDto)
         {
+            await GuardModel.AgainstNotValid(modelValidatorHub, updateDto);
+            int stockId = await queries.GetStockIdByProductId(updateDto.IdProduct);
 
-            int stockId = await queries.GetStockIdByProductId(dto.IdProduct);
+            await commands.UpdateStockAmount(stockId, updateDto.Amount);
 
-            await commands.UpdateStockAmount(stockId, dto.Amount);
-
-            await outputPort.Handle(dto.IdProduct);
+            await outputPort.Handle(updateDto.IdProduct);
         }
     }
 }

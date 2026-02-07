@@ -1,11 +1,12 @@
-﻿using AppStore.Entities.DTOs.Stock.UpdateStock;
-using AppStore.Frontend.BusinessObjects.Interfaces.Stock.UpdateStock;
-using AppStore.Frontend.Views.Resources.Product.UpdateProduct;
+﻿using Microsoft.AspNetCore.Components.Forms;
 
 namespace AppStore.Frontend.Views.ViewModels.Product.UpdateProduct
 {
     public class UpdateProductViewModel(IUpdateProductGateway productGateway,
-       IUpdateStockGateway stockGateway)
+                                        IUpdateStockGateway stockGateway, 
+                                        IGetAllCategoriesGateway categoriesGateway,
+                                        IGetAllSuppliersGateway suppliersGateway, 
+                                        IModelValidatorHub<UpdateProductViewModel> validator)
     {
         #region --Propiedades relacionadas a UpdateProductDto--
         // Los atributos que vamos a editar
@@ -23,19 +24,26 @@ namespace AppStore.Frontend.Views.ViewModels.Product.UpdateProduct
         public string CategoryName { get; private set; } = "";
         public string SupplierName { get; private set; } = "";
 
-
         #endregion
         #region --Atributos para manipular Stock--
         public int StockAmount { get; set; }
         private int _originalStockAmount;
         #endregion
 
-        public string InformationMessage { get; private set; } = "";
-        
+        public IEnumerable<CategoryItemDto> Categories { get; private set; } = [];
+        public IEnumerable<SupplierItemDto> Suppliers { get; private set; } = [];
 
+        public string InformationMessage { get; private set; } = "";
+
+        public IModelValidatorHub<UpdateProductViewModel> Validator => validator;
+
+        
         public async Task Load(int idProduct)
         {
             InformationMessage = "";
+
+            Categories = await categoriesGateway.GetAllAsync(false);
+            Suppliers = await suppliersGateway.GetAllAsync(false);
 
             var p = await productGateway.GetByIdAsync(idProduct);
 
@@ -44,13 +52,8 @@ namespace AppStore.Frontend.Views.ViewModels.Product.UpdateProduct
             Name = p.Name;
             Price = p.Price;
             Description = p.Description;
-
             IdCategory = p.IdCategory;
-            CategoryName = p.CategoryName;
-
             IdSupplier = p.IdSupplier;
-            SupplierName = p.SupplierName;
-
             StockAmount = p.StockAmount;
             _originalStockAmount = p.StockAmount;
         }
@@ -59,20 +62,23 @@ namespace AppStore.Frontend.Views.ViewModels.Product.UpdateProduct
         public async Task Save()
         {
             InformationMessage = "";
+            
 
-            Console.WriteLine($"DEBUG StockAmount={StockAmount} original={_originalStockAmount}");
             //Update del Product
-            await productGateway.UpdateAsync((UpdateProductDto)this);
+           
+                await productGateway.UpdateAsync((UpdateProductDto)this);
 
-            //Update del Stock si cambio
-            if (StockAmount != _originalStockAmount)
-            {
-                await stockGateway.UpdateAsync(new UpdateStockDto(IdProduct, StockAmount));
-                _originalStockAmount = StockAmount; // ya quedó sincronizado
-            }
+                //Update del Stock si cambio
+                if (StockAmount != _originalStockAmount)
+                {
+                    await stockGateway.UpdateAsync(new UpdateStockDto(IdProduct, StockAmount));
+                    _originalStockAmount = StockAmount;
+                }
 
-            InformationMessage = string.Format(
-                UpdateProductMessages.UpdatedProductTemplate, IdProduct);
+                InformationMessage = string.Format(
+                    UpdateProductMessages.UpdatedProductTemplate, IdProduct);
+            
+            
         }
 
         public static explicit operator UpdateProductDto(UpdateProductViewModel model) =>

@@ -1,9 +1,4 @@
-﻿using AppStore.Entities.DTOs.Products.GetProducts.AppStore.Entities.DTOs.Products;
-using AppStore.Entities.DTOs.Products.GetProducts;
-using AppStore.Entities.DTOs.Categories.GetCategories;
-using AppStore.Entities.DTOs.Suppliers.GetSupplier;
-
-namespace AppStore.Backend.BusinessObjects.Interfaces.Repositories
+﻿namespace AppStore.Backend.BusinessObjects.Interfaces.Repositories
 {
     public interface IQueriesRepository
     {

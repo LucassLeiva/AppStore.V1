@@ -14,8 +14,11 @@
                 .GreaterThan(0, CreateProductMessages.IdSupplierGreaterThanZero);
 
             AddRuleFor(p => p.InternalCode)
+                .StopOnFirstFailure()
                 .NotEmpty(CreateProductMessages.InternalCodeNotEmpty)
-                .MaximumLength(50, CreateProductMessages.InternalCodeMaximumLength);
+                .MaximumLength(50, CreateProductMessages.InternalCodeMaximumLength)
+                .Must(code => Regex.IsMatch(code, "^[A-Za-z0-9_-]+$"),
+                CreateProductMessages.InternalCodeInvalidFormat);
 
             AddRuleFor(p => p.Name)
                 .NotEmpty(CreateProductMessages.NameNotEmpty)
@@ -25,7 +28,13 @@
                 .GreaterThan<decimal>(0, CreateProductMessages.PriceGreaterThanZero);
 
             AddRuleFor<short>(p => p.StockInicial)
-                .GreaterThan((short)0, CreateProductMessages.StockInitialGreaterOrEqualZero);
+                .Must(s => s >= 0, CreateProductMessages.StockInitialGreaterOrEqualZero);
+
+            AddRuleFor(d => d.Description)
+                .StopOnFirstFailure()
+                .Must(desc => desc is null || !string.IsNullOrWhiteSpace(desc),
+                      CreateProductMessages.DescriptionOnlyWhitespace)
+                .MaximumLength(500, CreateProductMessages.DescriptionMaximumLength);
         }
     }
 }

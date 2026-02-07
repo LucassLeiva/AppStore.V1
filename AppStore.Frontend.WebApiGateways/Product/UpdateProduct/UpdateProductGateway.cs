@@ -22,6 +22,7 @@ namespace AppStore.Frontend.WebApiGateways.Product.UpdateProduct
 
             if (!response.IsSuccessStatusCode)
                 throw new HttpRequestException(await response.Content.ReadAsStringAsync());
+            
         }
     }
 }
