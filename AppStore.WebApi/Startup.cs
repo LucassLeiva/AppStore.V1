@@ -31,6 +31,7 @@
         public static WebApplication ConfigureWebApplication(
         this WebApplication app)
         {
+            app.UseExceptionHandler(builder => { });
             // Habilitar el middleware para servir el documento
             // JSON generado y la interfaz UI de Swagger en el
             // ambiente de desarrollo.

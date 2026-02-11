@@ -8,22 +8,42 @@
 
         public async Task Load(int idProduct)
         {
+
             InformationMessage = "";
+            IdProduct = 0;
+            ProductName = "";
 
-            var product = await getbyidGateway.GetByIdAsync(idProduct);
+            try
+            {
+                var product = await getbyidGateway.GetByIdAsync(idProduct);
 
-            IdProduct = product.IdProduct;
-            ProductName = product.Name;
+                IdProduct = product.IdProduct;
+                ProductName = product.Name;
+            }
+            catch (HttpRequestException ex)
+            {
+                InformationMessage = ex.Message;
+            }
+        
         }
-        public async Task Delete(int idProduct)
+        public async Task<bool> Delete()
         {
             InformationMessage = "";
 
-            await gateway.DeleteAsync(IdProduct);
+            try
+            {
+                await gateway.DeleteAsync(IdProduct);
 
-            InformationMessage = string.Format(
-                DeleteProductMessages.DeletedProductTemplate,
-                ProductName);
+                InformationMessage = string.Format(
+                    DeleteProductMessages.DeletedProductTemplate,
+                    ProductName);
+                return true;
+            }
+            catch (HttpRequestException ex)
+            {
+                InformationMessage = ex.Message;
+                return false;
+            }
         }
     }
 }

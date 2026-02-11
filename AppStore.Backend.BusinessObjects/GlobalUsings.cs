@@ -14,3 +14,4 @@ global using AppStore.Entities.DTOs.Suppliers.DeleteSupplier;
 global using AppStore.Entities.DTOs.Products.ActivateProduct;
 global using AppStore.Backend.BusinessObjects.ValueObjects.Product;
 global using AppStore.Entities.DTOs.Products.GetProducts;
+global using AppStore.Exceptions.Entities.Exceptions;

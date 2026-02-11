@@ -9,32 +9,29 @@ namespace AppStore.Backend.UseCases.Products.CreateProduct
     {
         public async Task Handle(CreateProductDto dto)
         {
-            //Validar modelo
+            // 1) Validar modelo
             await GuardModel.AgainstNotValid(modelValidatorHub, dto);
 
-            // Crear stock con la cantidad inicial (DTO trae short)
+            // 2) Crear dominio
             var stock = new Stock(dto.StockInicial);
 
-            //Persistir stock y obtener su Id generado por DB
-            int stockId = await repository.CreateStock(stock);
-            stock.IdStock = stockId; // opcional, por claridad
-
-            //Crear producto apuntando al stockId real
             var product = new Product(
                 dto.IdCategory,
                 dto.InternalCode,
                 dto.Name,
                 dto.Price,
-                stockId,
+                                // 👈 no lo usamos para persistir ahora
                 dto.IdSupplier,
                 dto.Description
             );
 
-            //Persistir producto y obtener IdProducto real
-            int productId = await repository.CreateProduct(product);
-            product.IdProduct = productId;
+            // 3) Trackear cambios (sin commitear)
+            await repository.CreateProductWithInitialStock(product, stock);
 
-            //Presenter ya recibe IdProducto correcto
+            // ✅ 4) Un solo commit
+            await repository.SaveChanges();
+
+            // ✅ 5) Ahora product.IdProduct y stock.IdStock ya están
             await outputPort.Handle(product);
         }
     }

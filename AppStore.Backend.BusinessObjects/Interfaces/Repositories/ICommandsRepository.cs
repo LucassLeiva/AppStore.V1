@@ -4,15 +4,20 @@ namespace AppStore.Backend.BusinessObjects.Interfaces.Repositories
 {
     public interface ICommandsRepository : IUnitOfWork
     {
+
+        //Anteriormente tenia esto:
+        //Task<int> CreateProduct(Product product);
+        //Task<int> CreateStock(Stock stock);
+
         //Products Commands
-        Task<int> CreateProduct(Product product);
+       Task CreateProductWithInitialStock(Product product, Stock stock);
         Task<int> UpdateProduct(Product product);
         Task<int> DeleteProduct(int idProduct);
 
         //Stocks Commands
         Task UpdateStockAmount(int idStock, int amount);
         Task UpdateProductState(int idProduct, int state);
-        Task<int> CreateStock(Stock stock);
+        
 
         //Category Commands
         Task<int> CreateCategory(Category category);

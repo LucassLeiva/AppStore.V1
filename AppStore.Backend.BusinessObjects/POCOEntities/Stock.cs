@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace AppStore.Backend.BusinessObjects.POCOEntities
 {
@@ -19,5 +20,6 @@ namespace AppStore.Backend.BusinessObjects.POCOEntities
             if (cantidad <= 0) throw new ArgumentException("El stock no puede ser negativo");
             Amount = cantidad;
         }
+
     }
 }

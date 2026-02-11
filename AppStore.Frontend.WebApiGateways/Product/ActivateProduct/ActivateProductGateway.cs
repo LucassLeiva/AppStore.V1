@@ -4,12 +4,7 @@
     {
         public async Task<int> ActivateAsync(int idProduct)
         {
-            var url = $"{Endpoints.ActivateProduct}?idProduct={idProduct}";
-
-            var response = await client.PutAsync(url, content: null);
-
-            if (!response.IsSuccessStatusCode)
-                throw new HttpRequestException(await response.Content.ReadAsStringAsync());
+            var response = await client.PutAsync($"{Endpoints.ActivateProduct}?idProduct={idProduct}",content: null);
 
             return await response.Content.ReadFromJsonAsync<int>();
         }

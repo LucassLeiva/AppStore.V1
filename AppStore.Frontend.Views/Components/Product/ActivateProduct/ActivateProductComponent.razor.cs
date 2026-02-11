@@ -17,12 +17,17 @@
 
             IsBusy = true;
 
-            await Model.Activate();
+            try
+            {
+                var ok = await Model.Activate();
 
-            IsBusy = false;
-
-            if (OnActivated.HasDelegate)
-                await OnActivated.InvokeAsync();
+                if (ok && OnActivated.HasDelegate)
+                    await OnActivated.InvokeAsync();
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         private async Task CancelInternal()

@@ -12,10 +12,10 @@
     {
         #region State
         public IEnumerable<ProductItemDto> Products { get; private set; } = [];
-        
         public ProductStateFilter StateFilter { get; set; } = ProductStateFilter.Active;
         public string InformationMessage { get; private set; } = "";
         #endregion
+        
 
         public async Task Load()
         {
@@ -25,15 +25,11 @@
 
             try
             {
-                var sw = Stopwatch.StartNew();
-
+               
                 bool includeInactive = StateFilter != ProductStateFilter.Active;
                 
 
                 var result = await gateway.GetAllAsync(includeInactive);
-
-                sw.Stop(); // ⏹️ frena el cronómetro
-                Console.WriteLine($"⏱️ Tiempo carga productos: {sw.ElapsedMilliseconds} ms");
 
                 Products = StateFilter switch
                 {

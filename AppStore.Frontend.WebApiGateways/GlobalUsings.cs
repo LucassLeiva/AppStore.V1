@@ -27,3 +27,5 @@ global using AppStore.Frontend.BusinessObjects.Interfaces.Product.ActivateProduc
 global using AppStore.Frontend.BusinessObjects.Interfaces.Product.GetProductById;
 global using AppStore.Frontend.WebApiGateways.Product.ActivateProduct;
 global using AppStore.Frontend.WebApiGateways.Product.GetProductById;
+global using AppStore.HttpDelegatingHandlers;
+global using AppStore.Entities.DTOs.Products.GetProducts;

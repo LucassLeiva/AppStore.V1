@@ -13,7 +13,8 @@
 <EditForm Model="Model" OnValidSubmit="SaveInternal">
 
    
-    <ModelValidator Validator="Model.Validator" />
+    <ModelValidator Validator="Model.Validator"
+                    @ref=Model.ModelValidatorComponentReference />
     @* Para mostrar el mensaje arriba de forma general *@
     @* <ValidationSummary /> *@
     <div class="row g-3">

@@ -12,7 +12,7 @@
 
         public decimal Price { get; set; }
 
-        public int IdStock { get; set; }
+        public int IdStock { get; private set; }
 
         public string? Description { get; set; }
 
@@ -27,7 +27,7 @@
             string internalCode,
             string name,
             decimal price,
-            int idStock,
+            
             int idSupplier,
             string? description
         )
@@ -36,7 +36,6 @@
             InternalCode = internalCode;
             Name = name;
             Price = price;
-            IdStock = idStock;
             IdSupplier = idSupplier;
             Description = description;
 
@@ -58,13 +57,17 @@
             if (IdCategory <= 0)
                 throw new ArgumentException("La categoría es obligatoria");
 
-            if (IdStock <= 0)
-                throw new ArgumentException("El stock es obligatorio");
+            
 
             if (IdSupplier <= 0)
                 throw new ArgumentException("El proveedor es obligatorio");
         }
-
+        //Asigna el IdStock al producto posteriormente cuando ya tengo el ID
+        public void AttachStock(int idStock)
+        {
+            if (idStock <= 0) throw new ArgumentException("El stock es obligatorio");
+            IdStock = idStock;
+        }
         public void Deactivate() => State = 0;
 
         public void Activate() => State = 1;

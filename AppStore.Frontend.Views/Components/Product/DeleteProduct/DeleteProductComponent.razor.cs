@@ -11,7 +11,7 @@ namespace AppStore.Frontend.Views.Components.Product.DeleteProduct
     {
         [Parameter] public DeleteProductViewModel Model { get; set; } = default!;
         [Parameter] public int IdProduct { get; set; }
-        [Parameter] public string ProductName { get; set; }
+       
 
 
         // Para controlar si el Modal se muestra
@@ -21,6 +21,7 @@ namespace AppStore.Frontend.Views.Components.Product.DeleteProduct
         [Parameter] public EventCallback OnCancel { get; set; }
         [Parameter] public EventCallback<int> OnDeleted { get; set; }
 
+        // Para el patron Async Command Guard: Investigar bien que hace al momento de explicarlo
         private bool IsBusy { get; set; }
 
         private async Task DeleteInternal()
@@ -30,9 +31,9 @@ namespace AppStore.Frontend.Views.Components.Product.DeleteProduct
             IsBusy = true;
             try
             {
-                await Model.Delete(IdProduct);
+                var ok = await Model.Delete();
 
-                if (OnDeleted.HasDelegate)
+                if (ok && OnDeleted.HasDelegate)
                     await OnDeleted.InvokeAsync(IdProduct);
             }
             finally

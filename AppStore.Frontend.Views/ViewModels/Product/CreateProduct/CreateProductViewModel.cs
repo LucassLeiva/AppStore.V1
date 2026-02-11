@@ -1,9 +1,4 @@
-﻿using AppStore.Entities.DTOs.Categories.GetCategories;
-using AppStore.Entities.DTOs.Suppliers.GetSupplier;
-using AppStore.Frontend.BusinessObjects.Interfaces.Category.GetAllCategories;
-using AppStore.Frontend.BusinessObjects.Interfaces.Supplier.GetAllSuppliers;
-
-namespace AppStore.Frontend.Views.ViewModels.Product.CreateProduct
+﻿namespace AppStore.Frontend.Views.ViewModels.Product.CreateProduct
 {
     public class CreateProductViewModel(
        ICreateProductGateway gateway,
@@ -29,7 +24,7 @@ namespace AppStore.Frontend.Views.ViewModels.Product.CreateProduct
         public string InformationMessage { get; private set; }
 
         public IModelValidatorHub<CreateProductViewModel> Validator => validator;
-
+        public ModelValidator<CreateProductViewModel> ModelValidatorComponentReference{ get; set; }
         public async Task LoadCombos()
         {
             //false para que elija solo los activos
@@ -48,12 +43,26 @@ namespace AppStore.Frontend.Views.ViewModels.Product.CreateProduct
         public async Task Send()
         {
             InformationMessage = "";
+            try
+            {
 
-            var productId = await gateway.CreateProductAsync((CreateProductDto)this);
+                var productId = await gateway.CreateProductAsync((CreateProductDto)this);
+                InformationMessage = string.Format(CreateProductMessages.CreatedProductTemplate, productId);
 
-           
-            InformationMessage = string.Format(
-                CreateProductMessages.CreatedProductTemplate, productId);
+            }
+            catch (HttpRequestException ex) 
+            {
+                if (ex.Data.Contains("Errors"))
+                {
+                    IEnumerable<ValidationError> Errors =
+                    ex.Data["Errors"] as IEnumerable<ValidationError>;
+                    ModelValidatorComponentReference.AddErrors(Errors);
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
 
         public static explicit operator CreateProductDto(CreateProductViewModel model) =>

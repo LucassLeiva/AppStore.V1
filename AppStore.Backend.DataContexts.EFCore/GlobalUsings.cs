@@ -9,3 +9,5 @@ global using Microsoft.Extensions.Options;
 global using System;
 global using System.Reflection;
 global using System.Threading.Tasks;
+global using AppStore.Exceptions.Entities.Exceptions;
+global using AppStore.Backend.DataContexts.EFCore.Guards;

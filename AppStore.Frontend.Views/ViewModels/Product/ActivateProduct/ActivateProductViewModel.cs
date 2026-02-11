@@ -11,20 +11,43 @@
         public async Task Load(int idProduct)
         {
             InformationMessage = "";
-            var product = await getProductGateway.GetByIdAsync(idProduct);
+            IdProduct = 0;
+            ProductName = "";
 
-            IdProduct = product.IdProduct;
-            ProductName = product.Name;
+            try
+            {
+                var product = await getProductGateway.GetByIdAsync(idProduct);
+
+                IdProduct = product.IdProduct;
+                ProductName = product.Name;
+            }
+            catch (HttpRequestException ex)
+            {
+                InformationMessage = ex.Message;
+            }
         }
 
-        public async Task Activate()
+        public async Task<bool> Activate()
         {
+            InformationMessage = "";
+
             await gateway.ActivateAsync(IdProduct);
 
-            InformationMessage =
-                string.Format(
+            try
+            {
+                await gateway.ActivateAsync(IdProduct);
+
+                InformationMessage = string.Format(
                     ActivateProductMessages.ActivatedProductTemplate,
                     ProductName);
+
+                return true;
+            }
+            catch (HttpRequestException ex)
+            {
+                InformationMessage = ex.Message;
+                return false;
+            }
         }
     }
 }

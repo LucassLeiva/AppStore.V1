@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AppStore.Frontend.BusinessObjects\AppStore.Frontend.BusinessObjects.csproj" />
+    <ProjectReference Include="..\AppStore.HttpDelegatingHandlers\AppStore.HttpDelegatingHandlers.csproj" />
   </ItemGroup>
 
 </Project>

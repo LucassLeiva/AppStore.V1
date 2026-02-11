@@ -1,11 +1,4 @@
-﻿using AppStore.Frontend.Views.ViewModels.Product.DeleteProduct;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AppStore.Frontend.Views.Pages.Product.DeleteProduct
+﻿namespace AppStore.Frontend.Views.Pages.Product.DeleteProduct
 {
     public partial class DeleteProduct
     {

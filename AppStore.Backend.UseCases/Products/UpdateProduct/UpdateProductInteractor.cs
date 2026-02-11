@@ -20,7 +20,7 @@
                 productDto.InternalCode,
                 productDto.Name,
                 productDto.Price,
-                stockId,
+               
                 productDto.IdSupplier,
                 productDto.Description
             )

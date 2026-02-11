@@ -1,5 +1,6 @@
 ﻿<EditForm Model=Product OnValidSubmit= "Product.Send">
-    <ModelValidator Validator="Product.Validator"/>
+    <ModelValidator Validator="Product.Validator" 
+         @ref=Product.ModelValidatorComponentReference />
     
     <div class="form-group">
         <label for="idCategory">

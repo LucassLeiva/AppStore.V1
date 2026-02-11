@@ -1,6 +1,4 @@
-﻿using AppStore.Backend.BusinessObjects.POCOEntities;
-
-namespace AppStore.Backend.DataContexts.EFCore.Services
+﻿namespace AppStore.Backend.DataContexts.EFCore.Services
 {
 
     internal class AppStoreCommandsDataContext(
@@ -75,9 +73,9 @@ namespace AppStore.Backend.DataContexts.EFCore.Services
 
 
 
-        public async Task SaveChangesAsync() => await base.SaveChangesAsync();
+        public async Task SaveChangesAsync() => await GuardDBContext.AgainstSaveChangesErrorAsync(this);
 
-        }
+    }
 }
 
 

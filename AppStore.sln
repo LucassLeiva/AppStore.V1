@@ -67,6 +67,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppStore.ValidationService.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppStore.Validators.Entities", "AppStore.Validators.Entities\AppStore.Validators.Entities.csproj", "{F82DB5D0-8CBE-4FB0-B14F-826BD777E021}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppStore.Exceptions.Entities", "AppStore.Exceptions.Entities\AppStore.Exceptions.Entities.csproj", "{A53DEC6B-1E23-4F43-AA08-8915CE09239D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppStore.HttpDelegatingHandlers", "AppStore.HttpDelegatingHandlers\AppStore.HttpDelegatingHandlers.csproj", "{4D12609B-FA0D-48B6-B6BD-EA805919C5F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,6 +149,14 @@ Global
 		{F82DB5D0-8CBE-4FB0-B14F-826BD777E021}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F82DB5D0-8CBE-4FB0-B14F-826BD777E021}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F82DB5D0-8CBE-4FB0-B14F-826BD777E021}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A53DEC6B-1E23-4F43-AA08-8915CE09239D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A53DEC6B-1E23-4F43-AA08-8915CE09239D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A53DEC6B-1E23-4F43-AA08-8915CE09239D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A53DEC6B-1E23-4F43-AA08-8915CE09239D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D12609B-FA0D-48B6-B6BD-EA805919C5F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D12609B-FA0D-48B6-B6BD-EA805919C5F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D12609B-FA0D-48B6-B6BD-EA805919C5F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D12609B-FA0D-48B6-B6BD-EA805919C5F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -178,5 +190,7 @@ Global
 		{105551D2-8131-4419-A05F-6542E2A69932} = {29A5222E-21BD-4BDA-8039-89FCCB9478FC}
 		{4DF78E8A-0F35-49AB-9661-6FF225DFFA75} = {105551D2-8131-4419-A05F-6542E2A69932}
 		{F82DB5D0-8CBE-4FB0-B14F-826BD777E021} = {2EDDACEB-4EF6-4C1A-B596-AE6F8E6702F4}
+		{A53DEC6B-1E23-4F43-AA08-8915CE09239D} = {2EDDACEB-4EF6-4C1A-B596-AE6F8E6702F4}
+		{4D12609B-FA0D-48B6-B6BD-EA805919C5F6} = {2EDDACEB-4EF6-4C1A-B596-AE6F8E6702F4}
 	EndGlobalSection
 EndGlobal

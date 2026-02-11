@@ -1,0 +1,10 @@
+global using AppStore.Validation.Entities.ValueObjects;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.Mvc;
+global using System.Text.Json;
+global using AppStore.Exceptions.Entities.Exceptions;
+global using AppStore.Exceptions.Entities.Extensions;
+global using AppStore.Exceptions.Entities.Resources;
+global using Microsoft.AspNetCore.Diagnostics;
+global using Microsoft.Extensions.Logging;
+global using AppStore.Exceptions.Entities.ExceptionHandlers;
