@@ -1,32 +1,59 @@
-﻿namespace AppStore.Frontend.Views.ViewModels.Product.UpdateProduct
+﻿using AppStore.Entities.DTOs.Products.UpdateProductWithStock;
+using AppStore.Frontend.BusinessObjects.Interfaces.Product.UpdateProductWithStock;
+using AppStore.Frontend.Views.Models.Product.UpdateProduct;
+using AppStore.Frontend.Views.Utilities;
+
+namespace AppStore.Frontend.Views.ViewModels.Product.UpdateProduct
 {
     public class UpdateProductViewModel(IUpdateProductGateway productGateway,
-                                        IUpdateStockGateway stockGateway, 
+                                        IUpdateStockGateway stockGateway,
+                                        IUpdateProductWithStockGateway updateProductWithStockGateway,
                                         IGetAllCategoriesGateway categoriesGateway,
                                          IGetAllSuppliersGateway suppliersGateway,
-                                        IGetProductByIdGateway getByIdGateway,
-                                        
+                                        IGetProductByIdGateway getByIdGateway,      
                                         IModelValidatorHub<UpdateProductViewModel> validator)
     {
-        #region --Propiedades relacionadas a UpdateProductDto--
-        // Los atributos que vamos a editar
-        public int IdProduct { get; private set; }
-        public string InternalCode { get; set; } = "";
-        public string Name { get; set; } = "";
-        public decimal Price { get; set; }
-        public string? Description { get; set; }
+        #region Metodos para Normalizar Inputs
+        private void NormalizeTextFields()
+        {
+            Model.InternalCode = TextNormalizer.UpperInvariant(Model.InternalCode);
+            Model.Name = TextNormalizer.CapitalizeWords(Model.Name);
+            Model.Description = TextNormalizer.CapitalizeFirstLetter(Model.Description);
+        }
+        private static string? NormalizeOptional(string? s)
+        {
+            if (s is null) return null;
+            s = s.Trim();
+            return s.Length == 0 ? null : s;
+        }
+        //Normalizar en OnBlour en Input
+        public void NormalizeInternalCode()
+        {
+            Model.InternalCode = TextNormalizer.UpperInvariant(Model.InternalCode);
+        }
+        public void NormalizeName()
+        {
+            Model.Name = TextNormalizer.CapitalizeWords(Model.Name);
+        }
+        public void NormalizeDescription()
+        {
+            Model.Description = TextNormalizer.CapitalizeFirstLetter(Model.Description);
 
-        // IDS necesarios para guardar
-        public int IdCategory { get; set; }
-        public int IdSupplier { get; set; }
+        }
         #endregion
-        #region --Atributos para manipular Stock--
-        public int StockAmount { get; set; }
-        private int _originalStockAmount;
-        #endregion
-        #region --"Listas" para los dropdowns--
-        public IEnumerable<CategoryItemDto> Categories { get; private set; } = [];
-        public IEnumerable<SupplierItemDto> Suppliers { get; private set; } = [];
+        #region Declaracion de Variables
+        public UpdateProductModel Model { get; private set; } = new();
+        private UpdateProductSnapshot? _original;
+        //Utilizamos un record porque necesitamos que sea ininmutable la varible para comparar si cambio o no los datos del producto desde la UI.
+        private record UpdateProductSnapshot(
+           int IdCategory,
+           string InternalCode,
+           string Name,
+           decimal Price,
+           string? Description,
+           int IdSupplier,
+           int StockAmount
+       );
         #endregion
         #region --Propiedades relacionadas a la Validacion--
         public string InformationMessage { get; private set; } = "";
@@ -38,39 +65,98 @@
         {
             InformationMessage = "";
 
-            Categories = await categoriesGateway.GetAllAsync(false);
-            Suppliers = await suppliersGateway.GetAllAsync(false);
+            Model.Categories = await categoriesGateway.GetAllAsync(false);
+            Model.Suppliers = await suppliersGateway.GetAllAsync(false);
 
             var p = await getByIdGateway.GetByIdAsync(idProduct);
 
-            IdProduct = p.IdProduct;
-            InternalCode = p.InternalCode;
-            Name = p.Name;
-            Price = p.Price;
-            Description = p.Description;
-            IdCategory = p.IdCategory;
-            IdSupplier = p.IdSupplier;
-            StockAmount = p.StockAmount;
-            _originalStockAmount = p.StockAmount;
+            Model.IdProduct = p.IdProduct;
+            Model.InternalCode = p.InternalCode;
+            Model.Name = p.Name;
+            Model.Price = p.Price;
+            Model.Description = p.Description;
+            Model.IdCategory = p.IdCategory;
+            Model.IdSupplier = p.IdSupplier;
+            Model.StockAmount = p.StockAmount;
+
+            // Guardamos snapshot original
+            _original = new UpdateProductSnapshot(
+                Model.IdCategory,
+                Model.InternalCode,
+                Model.Name,
+                Model.Price,
+                NormalizeOptional(Model.Description),
+                Model.IdSupplier,
+                Model.StockAmount
+            );
         }
 
+        private bool ProductChanged()
+        {
+            if (_original is null) return true;
+
+            return
+                Model.IdCategory != _original.IdCategory ||
+                Model.IdSupplier != _original.IdSupplier ||
+                Model.Price != _original.Price ||
+                !string.Equals(Model.InternalCode, _original.InternalCode, StringComparison.Ordinal) ||
+                !string.Equals(Model.Name, _original.Name, StringComparison.Ordinal) ||
+                !string.Equals(NormalizeOptional(Model.Description), _original.Description, StringComparison.Ordinal);
+        }
+
+        private bool StockChanged()
+        {
+            if (_original is null) return true;
+            return Model.StockAmount != _original.StockAmount;
+        }
 
         public async Task Save()
         {
             InformationMessage = "";
+            NormalizeTextFields();
 
             try
             {
+                var productChanged = ProductChanged();
+                var stockChanged = StockChanged();
                 await productGateway.UpdateAsync((UpdateProductDto)this);
 
-                if (StockAmount != _originalStockAmount)
+                if (productChanged && stockChanged)
                 {
-                    await stockGateway.UpdateAsync(new UpdateStockDto(IdProduct, StockAmount));
-                    _originalStockAmount = StockAmount;
+                    await updateProductWithStockGateway.UpdateProductWithStockAsync(
+                        (UpdateProductWithStockDto)this);
+
+                }
+                else if (productChanged)
+                {
+                    // Caso 2: Solo producto
+                    await productGateway.UpdateAsync((UpdateProductDto)this);
+                }
+                else if (stockChanged)
+                {
+                    // Caso 3: Solo stock
+                    await stockGateway.UpdateStockAsync(
+                        new UpdateStockDto(Model.IdProduct, Model.StockAmount)
+                    );
+                }
+                else
+                {
+                    InformationMessage = "No hay cambios para guardar.";
+                    return;
                 }
 
-                InformationMessage = string.Format(
-                    UpdateProductMessages.UpdatedProductTemplate, IdProduct);
+                _original = new UpdateProductSnapshot(
+                    Model.IdCategory,
+                    Model.InternalCode,
+                    Model.Name,
+                    Model.Price,
+                    NormalizeOptional(Model.Description),
+                    Model.IdSupplier,
+                    Model.StockAmount
+                );
+
+                // Mensaje (usa el nombre ingresado)
+                InformationMessage = $"Producto \"{Model.Name}\" actualizado correctamente.";
             }
             catch (HttpRequestException ex)
             {
@@ -91,16 +177,28 @@
 
         }
 
-        public static explicit operator UpdateProductDto(UpdateProductViewModel model) =>
+        public static explicit operator UpdateProductDto(UpdateProductViewModel vm) =>
             new UpdateProductDto(
-                model.IdProduct,
-                model.IdCategory,
-                model.InternalCode,
-                model.Name,
-                model.Price,
-                model.Description,
-                model.IdSupplier
+                vm.Model.IdProduct,
+                vm.Model.IdCategory,
+                vm.Model.InternalCode,
+                vm.Model.Name,
+                vm.Model.Price,
+                NormalizeOptional(vm.Model.Description),
+                vm.Model.IdSupplier
             );
+        public static explicit operator UpdateProductWithStockDto(UpdateProductViewModel vm) =>
+            new UpdateProductWithStockDto(
+                vm.Model.IdProduct,
+                vm.Model.IdCategory,
+                vm.Model.InternalCode,
+                vm.Model.Name,
+                vm.Model.Price,
+                NormalizeOptional(vm.Model.Description),
+                vm.Model.IdSupplier,
+                vm.Model.StockAmount
+            );
+
     }
 }
 

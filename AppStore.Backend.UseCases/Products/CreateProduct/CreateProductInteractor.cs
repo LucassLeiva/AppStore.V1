@@ -1,18 +1,20 @@
 ﻿using AppStore.Backend.BusinessObjects.Interfaces.Products.CreateProduct;
+using AppStore.Transactions.Entities.Interfaces;
+using AppStore.Validation.Entities.Interfaces;
 
 namespace AppStore.Backend.UseCases.Products.CreateProduct
 {
     internal class CreateProductInteractor(
     ICreateProductOutputPort outputPort,
     ICommandsRepository repository,
-    IModelValidatorHub<CreateProductDto> modelValidatorHub) : ICreateProductInputPort
+    IModelValidatorHub<CreateProductDto> modelValidatorHub,
+    IDomainTransaction domainTransaction) : ICreateProductInputPort
     {
+
         public async Task Handle(CreateProductDto dto)
         {
-            // 1) Validar modelo
             await GuardModel.AgainstNotValid(modelValidatorHub, dto);
 
-            // 2) Crear dominio
             var stock = new Stock(dto.StockInicial);
 
             var product = new Product(
@@ -20,20 +22,36 @@ namespace AppStore.Backend.UseCases.Products.CreateProduct
                 dto.InternalCode,
                 dto.Name,
                 dto.Price,
-                                // 👈 no lo usamos para persistir ahora
                 dto.IdSupplier,
                 dto.Description
             );
 
-            // 3) Trackear cambios (sin commitear)
-            await repository.CreateProductWithInitialStock(product, stock);
+            try
+            {
+                domainTransaction.BeginTransaction();
 
-            // ✅ 4) Un solo commit
-            await repository.SaveChanges();
+                var (idProduct, idStock) =
+                    await repository.CreateProductWithInitialStock(product, stock);
 
-            // ✅ 5) Ahora product.IdProduct y stock.IdStock ya están
-            await outputPort.Handle(product);
+                
+
+                
+                stock.IdStock = idStock;
+                product.IdProduct = idProduct;
+
+                // Verifica si cumple la regla para asignar el ID al private set
+                product.AttachStock(idStock);
+
+                await outputPort.Handle(product);
+
+                domainTransaction.CommitTransaction();
+            }
+            catch
+            {
+                domainTransaction.RollbackTransaction();
+                throw;
+            }
         }
     }
-
 }
+

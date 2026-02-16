@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AppStore.Entities\AppStore.Entities.csproj" />
     <ProjectReference Include="..\AppStore.Exceptions.Entities\AppStore.Exceptions.Entities.csproj" />
+    <ProjectReference Include="..\AppStore.Transactions.Entities\AppStore.Transactions.Entities.csproj" />
     <ProjectReference Include="..\AppStore.Validation.Entities\AppStore.Validation.Entities.csproj" />
   </ItemGroup>
 

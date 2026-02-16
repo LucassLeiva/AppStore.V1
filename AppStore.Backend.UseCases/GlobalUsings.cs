@@ -51,3 +51,7 @@ global using AppStore.Backend.UseCases.Products.ActivateProduct;
 global using AppStore.Backend.UseCases.Resources.Stock.UpdateStock;
 global using AppStore.Backend.UseCases.Resources.Product.DeleteProduct;
 global using AppStore.Backend.UseCases.Resources.Product.ActivateProduct;
+global using AppStore.Backend.BusinessObjects.Interfaces.Products.UpdateProductWithStock;
+global using AppStore.Entities.DTOs.Products.UpdateProductWithStock;
+global using AppStore.Transactions.Entities.Interfaces;
+global using AppStore.Backend.UseCases.Products.UpdateProductWithStock;

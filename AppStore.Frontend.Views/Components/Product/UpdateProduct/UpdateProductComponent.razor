@@ -26,42 +26,47 @@
 
         <div class="col-12 col-md-3">
             <label class="form-label">@UpdateProductMessages.InternalCodeLabel</label>
-            <InputText class="form-control" @bind-Value="Model.InternalCode" />
-            <ValidationMessage For="() => Model.InternalCode" />
+            <InputText class="form-control" @bind-Value="Model.Model.InternalCode"
+                       @onblur="() => Model.NormalizeInternalCode()" />
+            <ValidationMessage For="() => Model.Model.InternalCode" />
         </div>
 
         <div class="col-12 col-md-6">
             <label class="form-label">@UpdateProductMessages.NameLabel</label>
-            <InputText class="form-control" @bind-Value="Model.Name" />
-            <ValidationMessage For="() => Model.Name" />
+            <InputText class="form-control" @bind-Value="Model.Model.Name"
+                       @onblur="() => Model.NormalizeName()" />
+            <ValidationMessage For="() =>Model.Model.Name" />
         </div>
 
         <div class="col-12 col-md-3">
             <label class="form-label">@UpdateProductMessages.PriceLabel</label>
-            <InputNumber class="form-control" @bind-Value="Model.Price" min="0" />
-            <ValidationMessage For="() => Model.Price" />
+            <InputNumber class="form-control" @bind-Value="Model.Model.Price" min="0"
+             ParsingErrorMessage="El Precio debe ser un número válido." />
+            <ValidationMessage For="() => Model.Model.Price" />
         </div>
 
 
         <div class="col-12 col-md-3">
             <label class="form-label">@UpdateProductMessages.StockAmountLabel</label>
-            <InputNumber class="form-control" @bind-Value="Model.StockAmount" min="0" />
-            <ValidationMessage For="() => Model.StockAmount" />
+            <InputNumber class="form-control" @bind-Value="Model.Model.StockAmount" min="0"
+             ParsingErrorMessage="La Cantidad debe ser un número válido." />
+            <ValidationMessage For="() => Model.Model.StockAmount" />
         </div>
 
         <div class="col-12 col-md-6">
             <label class="form-label">@UpdateProductMessages.DescriptionLabel</label>
-            <InputTextArea class="form-control" @bind-Value="Model.Description" rows="3" />
-            <ValidationMessage For="() => Model.Description" />
+            <InputTextArea class="form-control" @bind-Value="Model.Model.Description" rows="3"
+                           @onblur="() => Model.NormalizeDescription()" />
+            <ValidationMessage For="() => Model.Model.Description" />
         </div>
 
         <div class="col-12 col-md-6">
             <label class="form-label">@UpdateProductMessages.CategoryIdLabel</label>
 
             <InputSelect class="form-select"
-                         @bind-Value="Model.IdCategory">
+                         @bind-Value="Model.Model.IdCategory">
 
-                @foreach (var c in Model.Categories)
+                @foreach (var c in Model.Model.Categories)
                 {
                     <option value="@c.IdCategory">@c.Name</option>
                 }
@@ -73,9 +78,9 @@
             <label class="form-label">@UpdateProductMessages.SupplierIdLabel</label>
 
             <InputSelect class="form-select"
-                         @bind-Value="Model.IdSupplier">
+                         @bind-Value="Model.Model.IdSupplier">
 
-                @foreach (var s in Model.Suppliers)
+                @foreach (var s in Model.Model.Suppliers)
                 {
                     <option value="@s.IdSupplier">@s.Name</option>
                 }

@@ -28,12 +28,14 @@
                 .GreaterThan<decimal>(0, CreateProductMessages.PriceGreaterThanZero);
 
             AddRuleFor<short>(p => p.StockInicial)
-                .Must(s => s >= 0, CreateProductMessages.StockInitialGreaterOrEqualZero);
+                .StopOnFirstFailure()
+                .Must(s => s >= 0, CreateProductMessages.StockInitialGreaterOrEqualZero)
+                .Must(s => s <= short.MaxValue, CreateProductMessages.StockInitialLessOrEqualMaxValue);
 
             AddRuleFor(d => d.Description)
                 .StopOnFirstFailure()
-                .Must(desc => desc is null || !string.IsNullOrWhiteSpace(desc),
-                      CreateProductMessages.DescriptionOnlyWhitespace)
+                .Must(desc => desc is null || desc.Length == 0 || !string.IsNullOrWhiteSpace(desc),
+                    CreateProductMessages.DescriptionOnlyWhitespace)
                 .MaximumLength(500, CreateProductMessages.DescriptionMaximumLength);
         }
     }

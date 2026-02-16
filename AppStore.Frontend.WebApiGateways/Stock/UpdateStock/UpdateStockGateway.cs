@@ -2,7 +2,7 @@
 {
     internal class UpdateStockGateway(HttpClient client) : IUpdateStockGateway
     {
-        public async Task UpdateAsync(UpdateStockDto dto)
+        public async Task UpdateStockAsync(UpdateStockDto dto)
         {
             var response = await client.PutAsJsonAsync(Endpoints.UpdateStock, dto);
 

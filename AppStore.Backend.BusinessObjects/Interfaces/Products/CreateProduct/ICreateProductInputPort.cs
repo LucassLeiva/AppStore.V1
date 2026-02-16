@@ -4,6 +4,6 @@ namespace AppStore.Backend.BusinessObjects.Interfaces.Products.CreateProduct
 {
     public interface ICreateProductInputPort
     {
-        Task Handle(CreateProductDto orderDto);
+        Task Handle(CreateProductDto createProductDto);
     }
 }

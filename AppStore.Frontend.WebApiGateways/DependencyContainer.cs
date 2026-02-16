@@ -8,6 +8,7 @@ public static class DependencyContainer
         services.AddHttpClient<IGetAllProductsGateway,GetAllProductsGateway>(configureHttpClient).AddHttpMessageHandler<ExceptionDelegatingHandler>();
         services.AddHttpClient<IGetProductByIdGateway, GetProductByIdGateway>(configureHttpClient).AddHttpMessageHandler<ExceptionDelegatingHandler>();
         services.AddHttpClient<IUpdateProductGateway, UpdateProductGateway>(configureHttpClient).AddHttpMessageHandler<ExceptionDelegatingHandler>();
+        services.AddHttpClient<IUpdateProductWithStockGateway, UpdateProductWithStockGateway>(configureHttpClient).AddHttpMessageHandler<ExceptionDelegatingHandler>();
         services.AddHttpClient<IDeleteProductGateway, DeleteProductGateway>(configureHttpClient).AddHttpMessageHandler<ExceptionDelegatingHandler>();
         services.AddHttpClient<IActivateProductGateway, ActivateProductGateway>(configureHttpClient).AddHttpMessageHandler<ExceptionDelegatingHandler>();
 

@@ -9,6 +9,7 @@ public static class DependencyContainer
             services.AddScoped<IGetAllProductsInputPort, GetAllProductsInteractor>();
             services.AddScoped<IGetProductByIdInputPort, GetProductByIdInteractor>();
             services.AddScoped<IUpdateProductInputPort, UpdateProductInteractor>();
+            services.AddScoped<IUpdateProductWithStockInputPort, UpdateProductWithStockInteractor>();
             services.AddScoped<IDeleteProductInputPort,DeleteProductInteractor>();
             services.AddScoped<IActivateProductInputPort,ActivateProductInteractor>();
 
@@ -46,6 +47,11 @@ public static class DependencyContainer
         services.AddModelValidator<UpdateProductDto, UpdateProductCategoryValidator>();
         services.AddModelValidator<UpdateProductDto, UpdateProductSupplierValidator>();
         services.AddModelValidator<UpdateProductDto, UpdateProductInternalCodeValidator>();
+        //Servicios de UpdateProductWithStock
+        services.AddModelValidator<UpdateProductWithStockDto, UpdateProductWithStockCategoryValidator>();
+        services.AddModelValidator<UpdateProductWithStockDto, UpdateProductWithStockSupplierValidator>();
+        services.AddModelValidator<UpdateProductWithStockDto, UpdateProductWithStockInternalCodeValidator>();
+        services.AddModelValidator<UpdateProductWithStockDto, UpdateProductWithStockProductExistsValidator>();
         //Servicios de DeleteProduct
         services.AddModelValidator<DeleteProductDto, DeleteProductExistsValidator>();
         //Servicios de ActivateProduct

@@ -121,7 +121,7 @@
     <value>Categoría</value>
   </data>
   <data name="CreatedProductTemplate" xml:space="preserve">
-    <value>Producto {0} creado correctamente</value>
+    <value>Producto {1} (ID {0}) creado correctamente</value>
   </data>
   <data name="DescriptionLabel" xml:space="preserve">
     <value>Descripción</value>
@@ -157,7 +157,7 @@
     <value>Estado</value>
   </data>
   <data name="StockInitialLabel" xml:space="preserve">
-    <value>Stock inicial</value>
+    <value>Cantidad</value>
   </data>
   <data name="SupplierLabel" xml:space="preserve">
     <value>Proveedor</value>

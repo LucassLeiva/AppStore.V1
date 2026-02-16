@@ -120,6 +120,9 @@
   <data name="CategoryNotFoundError" xml:space="preserve">
     <value>La categoría especificada no existe.</value>
   </data>
+  <data name="ProductCreationCancelledTemplate" xml:space="preserve">
+    <value>Creación de producto {0} cancelado.</value>
+  </data>
   <data name="ProductInternalCodeAlreadyExists" xml:space="preserve">
     <value>Ya existe un producto con el código interno especificado.</value>
   </data>

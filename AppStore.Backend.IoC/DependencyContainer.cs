@@ -13,7 +13,8 @@ public static class DependencyContainer
         .AddValidators()
         .AddValidationExceptionHandler()
         .AddUpdateExceptionHandler()
-        .AddUnhandledExceptionHandler();
+        .AddUnhandledExceptionHandler()
+        .AddTransactionServices();
         return services;
     }
 }

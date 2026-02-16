@@ -17,8 +17,9 @@ namespace AppStore.Backend.BusinessObjects.POCOEntities
 
         public Stock(int cantidad)
         {
-            if (cantidad <= 0) throw new ArgumentException("El stock no puede ser negativo");
+            if (cantidad < 0) throw new ArgumentException("El stock no puede ser negativo");
             Amount = cantidad;
+
         }
 
     }

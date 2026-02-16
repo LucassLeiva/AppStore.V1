@@ -6,11 +6,11 @@ public static class DependencyContainer
     public static IServiceCollection AddViewsServices(
     this IServiceCollection services)
     {
-        services.AddTransient<CreateProductViewModel>();
+        services.AddScoped<CreateProductViewModel>();
         services.AddScoped<GetAllProductsViewModel>();
         services.AddScoped<UpdateProductViewModel>();
-        services.AddTransient<DeleteProductViewModel>();
-        services.AddTransient<ActivateProductViewModel>();
+        services.AddScoped<DeleteProductViewModel>();
+        services.AddScoped<ActivateProductViewModel>();
 
 
 

@@ -7,68 +7,34 @@ namespace AppStore.Backend.Repositories.Repositories
     // RESUMINO, LA FUNCION DE ESTA CLASE ES “Agarro cosas del negocio y las transformo en algo que la base de datos entiende”.
     internal class CommandsRepository(IAppStoreCommandsDataContext context) : ICommandsRepository
     {
-        private Product? _pendingProduct;
-        private Stock? _pendingStock;
-        private ProductEntity? _pendingProductEntity;
-        private StockEntity? _pendingStockEntity;
-        
+       
+
         //----------------------------------------------------------------Product Commands
-        //public async Task<int> CreateProduct(Product product)
-        //{
-        //    var productEntity = new ProductEntity
-        //    {
-        //        IdCategory = product.IdCategory,
-        //        InternalCode = product.InternalCode,
-        //        Name = product.Name,
-        //        Price = product.Price,
-        //        IdStock = product.IdStock,
-        //        Description = product.Description,
-        //        State = product.State,
-        //        IdSupplier = product.IdSupplier
-        //    };
-
-        //    await context.AddProductAsync(productEntity);
-        //    await context.SaveChangesAsync();
-
-        //    return productEntity.IdProduct;
-        //}
-        public async Task CreateProductWithInitialStock(Product product, Stock stock)
-    {
-        //Creamos las entidades EF
-        var stockEntity = new StockEntity
+        public async Task<(int IdProduct, int IdStock)> CreateProductWithInitialStock(Product product, Stock stock)
         {
-            Amount = stock.Amount,
-            State = stock.State
-        };
+            var stockEntity = new StockEntity
+            {
+                Amount = stock.Amount,
+                State = stock.State
+            };
 
-        var productEntity = new ProductEntity
-        {
-            IdCategory = product.IdCategory,
-            InternalCode = product.InternalCode,
-            Name = product.Name,
-            Price = product.Price,
-            Description = product.Description,
-            State = product.State,
-            IdSupplier = product.IdSupplier,
+            var productEntity = new ProductEntity
+            {
+                IdCategory = product.IdCategory,
+                InternalCode = product.InternalCode,
+                Name = product.Name,
+                Price = product.Price,
+                Description = product.Description,
+                State = product.State,
+                IdSupplier = product.IdSupplier,
+                Stock = stockEntity
+            };
 
-            //Seteamos la navegación
-            Stock = stockEntity
-        };
-
-            //Agregamos SOLO el producto (si la relación está bien EF, inserta el Stock tambien )
             await context.AddProductAsync(productEntity);
+            await context.SaveChangesAsync();
+            return (productEntity.IdProduct, stockEntity.IdStock);
+        }
 
-
-            //En vez de SaveChanges, guardamos referencias para devolver IDs luego del SaveChanges()
-            _pendingProduct = product;
-            _pendingStock = stock;
-            _pendingProductEntity = productEntity;
-            _pendingStockEntity = stockEntity;
-           
-    }
-
-
-    
 
         public async Task<int> UpdateProduct(Product product)
         {
@@ -83,7 +49,7 @@ namespace AppStore.Backend.Repositories.Repositories
             productEntity.Description = product.Description;
             productEntity.IdSupplier = product.IdSupplier;
 
-            await context.SaveChangesAsync();
+          
             return productEntity.IdProduct;
         }
 
@@ -106,19 +72,6 @@ namespace AppStore.Backend.Repositories.Repositories
         }
 
         //-------------------------------------------------------------------------Stock Commands
-        //public async Task<int> CreateStock(Stock stock)
-        //{
-        //    var stockEntity = new StockEntity
-        //    {
-        //        Amount = stock.Amount,
-        //        State = stock.State
-        //    };
-
-        //    await context.AddStockAsync(stockEntity);
-        //    await context.SaveChangesAsync();
-
-        //    return stockEntity.IdStock;
-        //}
 
 
         public async Task UpdateStockAmount(int idStock, int amount)
@@ -128,7 +81,7 @@ namespace AppStore.Backend.Repositories.Repositories
 
             stock.Amount = amount;
 
-            await context.SaveChangesAsync();
+            
         }
 
         //---------------------------------------------------------------------Category Commands
@@ -149,21 +102,6 @@ namespace AppStore.Backend.Repositories.Repositories
         }
 
 
-        //public async Task<int> UpdateCategory(Category category)
-        //{
-        //    var entity = new CategoryEntity
-        //    {
-        //        IdCategory = category.IdCategory,
-        //        Name = category.Name,
-        //        Description = category.Description,
-        //        State = category.State
-        //    };
-
-        //    await context.UpdateCategoryAsync(entity);
-        //    await context.SaveChangesAsync();
-
-        //    return entity.IdCategory;
-        //}
 
         public async Task<int> UpdateCategory(Category category)
         {
@@ -173,8 +111,6 @@ namespace AppStore.Backend.Repositories.Repositories
 
             entity.Name = category.Name;
             entity.Description = category.Description;
-            // Si tu regla es que el update NO cambia el State, no lo toques.
-            // Si sí lo cambia:
             entity.State = category.State;
 
             await context.SaveChangesAsync();
@@ -214,27 +150,6 @@ namespace AppStore.Backend.Repositories.Repositories
             return entity.IdSupplier;
         }
 
-        //public async Task<int> UpdateSupplier(Supplier supplier)
-        //{
-        //    var entity = new SupplierEntity
-        //    {
-        //        IdSupplier = supplier.IdSupplier,
-        //        Name = supplier.Name,
-        //        CUIT = supplier.CUIT,
-        //        Address = supplier.Address,
-        //        PhoneNumber = supplier.PhoneNumber,
-        //        Email = supplier.Email,
-        //        City = supplier.City,
-        //        Country = supplier.Country,
-        //        Postcode = supplier.Postcode,
-        //        State = supplier.State
-        //    };
-
-        //    await context.UpdateSupplierAsync(entity);
-        //    await context.SaveChangesAsync();
-
-        //    return entity.IdSupplier;
-        //}
 
         public async Task<int> UpdateSupplier(Supplier supplier)
         {
@@ -263,33 +178,9 @@ namespace AppStore.Backend.Repositories.Repositories
             await context.SaveChangesAsync();
             return idSupplier;
         }
+  
+        public Task SaveChanges() => context.SaveChangesAsync();
 
 
-
-
-        // Si tu IUnitOfWork todavía exige SaveChanges(), podés dejarlo igual:
-        public async Task SaveChanges()
-        {
-            await context.SaveChangesAsync();
-
-            // ✅ Después del commit EF ya llenó los IDs
-            if (_pendingProduct != null && _pendingStock != null &&
-            _pendingProductEntity != null && _pendingStockEntity != null)
-            {
-                _pendingStock.IdStock = _pendingStockEntity.IdStock;
-                _pendingProduct.IdProduct = _pendingProductEntity.IdProduct;
-
-                // ✅ acá se cumple la regla de dominio “producto debe tener stock”
-                _pendingProduct.AttachStock(_pendingStock.IdStock);
-
-                // opcional: limpiar
-                _pendingProduct = null;
-                _pendingStock = null;
-                _pendingProductEntity = null;
-                _pendingStockEntity = null;
-            }
-        }
-
-      
     }
 }

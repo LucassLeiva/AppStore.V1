@@ -14,6 +14,8 @@
 
             await commands.UpdateStockAmount(stockId, updateDto.Amount);
 
+            await commands.SaveChanges();
+
             await outputPort.Handle(updateDto.IdProduct);
         }
     }

@@ -8,6 +8,6 @@ namespace AppStore.Frontend.BusinessObjects.Interfaces.Stock.UpdateStock
 {
     public interface IUpdateStockGateway
     {
-        Task UpdateAsync(UpdateStockDto dto);
+        Task UpdateStockAsync(UpdateStockDto dto);
     }
 }

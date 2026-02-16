@@ -152,11 +152,20 @@ namespace AppStore.Validators.Entities.Resources.Product.CreateProduct {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a El stock inicial no puede ser negativo..
+        ///   Busca una cadena traducida similar a La cantidad inicial no puede ser negativa..
         /// </summary>
         internal static string StockInitialGreaterOrEqualZero {
             get {
                 return ResourceManager.GetString("StockInitialGreaterOrEqualZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El valor no puede superar 32.767..
+        /// </summary>
+        internal static string StockInitialLessOrEqualMaxValue {
+            get {
+                return ResourceManager.GetString("StockInitialLessOrEqualMaxValue", resourceCulture);
             }
         }
     }

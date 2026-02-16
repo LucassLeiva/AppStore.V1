@@ -38,3 +38,5 @@ global using AppStore.Backend.BusinessObjects.Interfaces.Suppliers.DeleteSupplie
 global using AppStore.Backend.Presenters.Suppliers.DeleteSupplier;
 global using AppStore.Backend.BusinessObjects.Interfaces.Products.ActivateProduct;
 global using AppStore.Backend.Presenters.Products.ActivateProduct;
+global using AppStore.Backend.BusinessObjects.Interfaces.Products.UpdateProductWithStock;
+global using AppStore.Backend.Presenters.Products.UpdateProductWithStock;

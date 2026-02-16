@@ -9,6 +9,7 @@ public static class EndpointsContainer
         app.UseGetAllProductsController();
         app.UseGetProductByIdController();
         app.UseUpdateProductController();
+        app.UseUpdateProductWithStockController();
         app.UseDeleteProductController();
         app.UseActivateProductController();
 

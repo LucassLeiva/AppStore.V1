@@ -1,4 +1,6 @@
-﻿namespace AppStore.RazorComponents.Validators
+﻿using System.Reflection;
+
+namespace AppStore.RazorComponents.Validators
 {
     public class ModelValidator<T> : ComponentBase
     {
@@ -10,6 +12,36 @@
         public IModelValidatorHub<T> Validator { get; set; }
 
         ValidationMessageStore ValidationMessageStore;
+
+        #region LO AGREGUE CON CHATGPT
+        string ResolvePropertyName(object rootModel, string propertyName)
+        {
+            if (string.IsNullOrWhiteSpace(propertyName))
+                return propertyName;
+
+            // Si ya viene como "Model.Name" o con path, lo dejamos
+            if (propertyName.Contains('.'))
+                return propertyName;
+
+            // 1) ¿Existe en el root? (Ej: Name)
+            if (HasProperty(rootModel, propertyName))
+                return propertyName;
+
+            // 2) ¿Existe en root.Model? (Ej: Model.Name)
+            var modelProp = rootModel.GetType().GetProperty("Model", BindingFlags.Instance | BindingFlags.Public);
+            var nested = modelProp?.GetValue(rootModel);
+            if (nested is not null && HasProperty(nested, propertyName))
+                return $"Model.{propertyName}";
+
+            // 3) fallback
+            return propertyName;
+        }
+        bool HasProperty(object obj, string propertyName)
+        {
+            return obj.GetType().GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public) is not null;
+        }
+
+        #endregion
 
 
         FieldIdentifier GetFieldIdentifier(object model, string propertyName)
@@ -62,6 +94,8 @@
             return new FieldIdentifier(NewModel,
             Token ?? PropertyPath);
         }
+
+        //LO MODIFIQUE CON CHATGPT
         public void AddErrors(IEnumerable<ValidationError> errors)
         {
             // Eliminar mensajes de validación existentes.
@@ -69,12 +103,25 @@
             // Agregar los errores de validación.
             foreach (var Error in errors)
             {
-                var FieldIdentifier =
-                GetFieldIdentifier(EditContext.Model, Error.PropertyName);
-                ValidationMessageStore.Add(FieldIdentifier, Error.Message);
+                var resolved = ResolvePropertyName(EditContext.Model, Error.PropertyName);
+                FieldIdentifier fieldIdentifier;
+                try
+                {
+                    fieldIdentifier = GetFieldIdentifier(EditContext.Model, resolved);
+                }
+                catch
+                {
+                    // Si algo raro pasa, al menos que vaya al summary (no rompe la app)
+                    fieldIdentifier = new FieldIdentifier(EditContext.Model, resolved);
+                }
+
+                ValidationMessageStore.Add(fieldIdentifier, Error.Message);
             }
+
             EditContext.NotifyValidationStateChanged();
         }
+
+
         async void ValidationRequested(object sender, ValidationRequestedEventArgs args)
         {
             // Validar el modelo.
@@ -89,6 +136,10 @@
                 AddErrors(Validator.Errors);
             }
         }
+
+
+
+        //LO MODIFIQUE CON CHATGPT
         async void FieldChanged(object sender, FieldChangedEventArgs e)
         {
             // Eliminamos mensajes de error del campo modificado.
@@ -99,8 +150,8 @@
             {
                 foreach (var Item in Validator.Errors)
                 {
-                    var FieldIdentifier = GetFieldIdentifier(
-                    EditContext.Model, Item.PropertyName);
+                    var resolved = ResolvePropertyName(EditContext.Model, Item.PropertyName);
+                    var FieldIdentifier = GetFieldIdentifier(EditContext.Model, resolved);
                     // Agregamos únicamente mensajes de error de la propiedad modificada.
                     if (FieldIdentifier.FieldName == e.FieldIdentifier.FieldName &&
                     FieldIdentifier.Model == e.FieldIdentifier.Model)
@@ -109,7 +160,10 @@
                     }
                 }
             }
+
+
             EditContext.NotifyValidationStateChanged();
+            
         }
 
         public override async Task SetParametersAsync(ParameterView parameters)

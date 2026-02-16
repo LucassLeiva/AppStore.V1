@@ -70,6 +70,15 @@ namespace AppStore.Backend.UseCases.Resources.Product.CreateProduct {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Creación de producto {0} cancelado..
+        /// </summary>
+        internal static string ProductCreationCancelledTemplate {
+            get {
+                return ResourceManager.GetString("ProductCreationCancelledTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ya existe un producto con el código interno especificado..
         /// </summary>
         internal static string ProductInternalCodeAlreadyExists {

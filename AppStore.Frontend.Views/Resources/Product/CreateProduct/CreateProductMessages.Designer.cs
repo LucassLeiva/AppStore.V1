@@ -79,7 +79,7 @@ namespace AppStore.Frontend.Views.Resources.Product.CreateProduct {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Producto {0} creado correctamente.
+        ///   Busca una cadena traducida similar a Producto {1} (ID {0}) creado correctamente.
         /// </summary>
         internal static string CreatedProductTemplate {
             get {
@@ -187,7 +187,7 @@ namespace AppStore.Frontend.Views.Resources.Product.CreateProduct {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Stock inicial.
+        ///   Busca una cadena traducida similar a Cantidad.
         /// </summary>
         internal static string StockInitialLabel {
             get {

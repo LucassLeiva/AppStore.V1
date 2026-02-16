@@ -36,3 +36,5 @@ global using System.Diagnostics;
 global using System.Linq;
 global using System.Threading.Tasks;
 global using AppStore.Frontend.Views.ViewModels.Product.DeleteProduct;
+global using AppStore.Frontend.Views.Models.Product.CreateProduct;
+global using AppStore.Entities.DTOs.Products.UpdateProductWithStock;

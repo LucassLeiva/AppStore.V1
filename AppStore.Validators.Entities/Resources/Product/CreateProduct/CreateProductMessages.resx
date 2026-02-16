@@ -148,6 +148,9 @@
     <value>El precio debe ser mayor que cero.</value>
   </data>
   <data name="StockInitialGreaterOrEqualZero" xml:space="preserve">
-    <value>El stock inicial no puede ser negativo.</value>
+    <value>La cantidad inicial no puede ser negativa.</value>
+  </data>
+  <data name="StockInitialLessOrEqualMaxValue" xml:space="preserve">
+    <value>El valor no puede superar 32.767.</value>
   </data>
 </root>
